@@ -1,3 +1,3 @@
-##Algunas cosas útiles :
+1. Algunas cosas útiles :
 
 + Carpeta linkeada por flask definida como template.

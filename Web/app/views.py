@@ -10,8 +10,13 @@ conn = psycopg2.connect("dbname=%s host=%s user=%s password=%s"%(database,host,u
 cur = conn.cursor()
 
 @app.route('/')
-@app.route('/index')
+@app.route('/index',  methods=['GET'])
 def index():
+    if request.method == 'GET':
+        temp=request.args['temperatura']
+        #temp = request.form['temperatura']
+        #print temp
+        return render_template("index.html",temperatura=temp)
     #arduinoPort = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
     #time.sleep(2)
     #getSerialValue=arduinoPort.readline()

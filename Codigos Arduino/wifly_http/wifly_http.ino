@@ -5,13 +5,13 @@
 #include <WiFly.h>
 #include "HTTPClient.h"
 
-#define SSID      "AndroidAP"
-#define KEY       "12345678"
+#define SSID      "Telematica"
+#define KEY       "w2c3o0n9"
 // WIFLY_AUTH_OPEN / WIFLY_AUTH_WPA1 / WIFLY_AUTH_WPA1_2 / WIFLY_AUTH_WPA2_PSK
 #define AUTH      WIFLY_AUTH_WPA2_PSK
 
 
-#define HTTP_GET_URL "http://127.0.0.1/?temperatura=100"
+#define HTTP_GET_URL "http://localhost/?temperatura=100"
 #define HTTP_POST_URL "http://httpbin.org/post"
 #define HTTP_POST_DATA "Hello world!"
 
@@ -31,7 +31,7 @@ void setup() {
   
   uart.begin(9600);         // WiFly UART Baud Rate: 9600
   // Wait WiFly to init
-//  delay(3000);
+  
 
   // check if WiFly is associated with AP(SSID)
   if (!wifly.isAssociated(SSID)) {
@@ -49,6 +49,7 @@ void setup() {
   Serial.println("------------------------------");
   while (http.get(HTTP_GET_URL, 10000) < 0) {
   }
+  
   while (wifly.receive((uint8_t *)&get, 1, 1000) == 1) {
     Serial.print(get);
   }
@@ -65,6 +66,7 @@ void setup() {
   if (wifly.commandMode()) {
     Serial.println("\r\n\r\nEnter command mode. Send \"exit\"(with \\r) to exit command mode");
   }
+  delay(3000);
 }
 
 

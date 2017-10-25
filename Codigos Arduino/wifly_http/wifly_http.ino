@@ -1,5 +1,4 @@
 
- 
 #include <Arduino.h>
 #include <SoftwareSerial.h>
 #include <WiFly.h>
@@ -11,7 +10,7 @@
 #define AUTH      WIFLY_AUTH_WPA2_PSK
 
 
-#define HTTP_GET_URL "http://localhost/?temperatura=100"
+#define HTTP_GET_URL "http://192.168.1.94/?temperatura=160"
 #define HTTP_POST_URL "http://httpbin.org/post"
 #define HTTP_POST_DATA "Hello world!"
 
@@ -19,6 +18,7 @@
 // Arduino       WiFly
 //  2    <---->    TX
 //  3    <---->    RX
+
 SoftwareSerial uart(2, 3);
 WiFly wifly(uart);
 HTTPClient http;
@@ -58,6 +58,7 @@ void setup() {
   //Serial.println("-------------------------------");
   //  while (http.post(HTTP_POST_URL, HTTP_POST_DATA, 10000) < 0) {
   //  }
+
   
   while (wifly.receive((uint8_t *)&get, 1, 1000) == 1) {
     Serial.print(get);
@@ -68,6 +69,7 @@ void setup() {
   }
   delay(3000);
 }
+
 
 
 void loop() {

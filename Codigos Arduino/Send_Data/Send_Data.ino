@@ -28,7 +28,7 @@ float c1 = 1.009249522e-03, c2 = 2.378405444e-04, c3 = 2.019202697e-07;
 #define Offset 0.00            //deviation compensate
 #define LED 13
 #define samplingIntervalph 20
-#define printIntervalph 10000
+#define printIntervalph 100
 #define ArrayLenth  40    //times of collection
 int pHArray[ArrayLenth];   //Store the average value of the sensor feedback
 int pHArrayIndex=0;
@@ -206,7 +206,7 @@ void loop() {
 
         if(ECcurrent >= 0 ){
           //client.printf("GET /?temperature=%s&ph=%s&ec=%s HTTP/1.1"), Tc , pHvalue , ECcurrent );
-          client.print("GET /?temperatura=");
+          client.print("GET /data?temperatura=");
           client.print(Tc);
           client.print("&ph=");
           client.print(pHValue);
@@ -218,7 +218,7 @@ void loop() {
         }
         else{
           char ECcurrent2[ ] = "Valor inapropiado";
-          client.print("GET /?temperatura=");
+          client.print("GET /data?temperatura=");
           client.print(Tc);
           client.print("&ph=");
           client.print(pHValue);

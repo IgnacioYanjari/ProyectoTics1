@@ -9,12 +9,19 @@ cur = conn.cursor()
 @app.route('/',methods=['GET','POST'])
 @app.route('/index',methods=['GET','POST'])
 def index():
-    temp="fail"
     if request.method == 'GET':
         temp=request.args['temperatura']
-        print(" Paquete recivido en : ")
+        ph = request.args['ph']
+        ec = request.args['ec']
+        #print ' Paquete recivido en :  %s.' % datetime.now()
+        #print 'temperatura %s pH %s Ec %s' %temp,%ph,%ec
+        print("Paquete recibido en : ")
         print(datetime.now())
-        print("temperatura")
+        print("temperatura : ")
         print(temp)
-        return render_template("index.html",temperatura=temp)
-    return render_template("index.html",temperatura=temp)
+        print("ph : ")
+        print(ph)
+        print("ec : ")
+        print(ec)
+        return render_template("index.html",temperatura=temp,ph=ph,ec=ec)
+    return render_template("index.html",temperatura=temp,ph=ph,ec=ec)

@@ -9,12 +9,12 @@ from flask import render_template,request,redirect
 @app.route('/')
 @app.route('/index')
 def index():
-    return "no"
+    return render_template("index.html")
 
 @app.route('/data',methods=['GET','POST'])
 def data():
     if request.method == 'GET':
-        temp=request.args['temperatura']
+        temp = request.args['temperatura']
         ph = request.args['ph']
         ec = request.args['ec']
         print("Paquete recibido en : " , datetime.now().second ,"temperatura : ", temp , "ph : " ,ph , "ec :",ec)

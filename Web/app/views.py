@@ -16,7 +16,6 @@ def data():
     if request.method == 'GET':
         temp = request.args['temperatura']
         ph = request.args['ph']
-        ec = request.args['ec']
-        print("Paquete recibido en : " , datetime.now().second ,"temperatura : ", temp , "ph : " ,ph , "ec :",ec)
-        return render_template("index.html",temperatura=temp,ph=ph,ec=ec)
+        print("Paquete recibido en : " , datetime.now().second ,"temperatura : ", temp , "ph : " ,ph)
+        return render_template("index.html",temperatura=temp,ph=ph)
     return render_template("index.html",temperatura=temp,ph=ph,ec=ec)

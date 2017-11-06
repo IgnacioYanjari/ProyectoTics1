@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -111,17 +112,7 @@
                     <i  class="fa fa-bar-chart-o fa-fw"></i> Datos en tiempo real
                 </div>
                 <div class="panel-body ">
-                  <div class="col-lg-4 text-center">
-                    <div class="panel panel-primary">
-                      <div class="panel-heading text-center">
-                        Electroconductividad
-                      </div>
-                      <div class="panel-body">
-                        {{ec}}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-4 text-center">
+                  <div class="col-lg-6 text-center">
                     <div class="panel panel-primary">
                       <div class="panel-heading text-center">
                         Ph
@@ -131,7 +122,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-4 text-center">
+                  <div class="col-lg-6 text-center">
                     <div class="panel panel-primary">
                       <div class="panel-heading text-center">
                         Temperatura  (°C)
@@ -205,22 +196,20 @@
                     <div class="row">
 
                       <div class="col-lg-4 col-md-4">
-                        <div class="form-group">
+                        <div class="form-group text-center">
                           <label for="sel1">Tipo de agua:</label>
                           <select class="form-control" id="sel1" name="tipo_agua">
-                            <option>1</option>
+                            <option class="text-center">Tropical</option>
                             <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
                           </select>
                         </div>
                       </div>
 
                       <div class="col-lg-4 col-md-4">
-                        <div class="form-group">
+                        <div class="form-group text-center">
                           <label for="sel1">Tipo de pez:</label>
                           <select class="form-control" id="sel1" name="tipo_pez">
-                            <option>1</option>
+                            <option>Esturión</option>
                             <option>2</option>
                             <option>3</option>
                             <option>4</option>
@@ -229,17 +218,12 @@
                       </div>
 
                       <div class="col-lg-4 col-md-4">
-                        <div class="form-group">
+                        <div class="form-group text-center">
                           <label for="msg">Nombre Pez:</label>
-                          <input id="msg" type="text" class="form-control" name="nombre_pez" value="">
+                          <input id="msg" type="text" class="form-control" name="nombre_pez" value="" placeholder="Nombre Pez">
                         </div>
                       </div>
                     </div>
-
-
-
-
-
 
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary">Ingresar</button>
@@ -248,7 +232,37 @@
                 </div>
               </div>
             </div>
+<!--
+            <div class="row text-center">
+              <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+            </div>
 
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog  modal-lg modal-rm">
+                <div class="alert alert-danger">
+                  <!-- Modal content
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title"> Alerta Cambio en Variable : </h4>
+                    </div>
+                    <div class="modal-body">
+                      <p> ¡¡ Valor de Ph Muy alto para peces viviendo en la pecera !!</p>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+        -->
 
 
             <!-- /.row -->
@@ -281,7 +295,7 @@
                                 <div class="col-lg-12 col-md-12">
                                   <div class="form-group text-center">
                                     <label for="sel1">Tiempo Final:</label>
-                                      <input type="date" vale="tiempo_final">
+                                    <input type="date" vale="tiempo_final">
                                   </div>
 
                                 <div class="col-lg-12">
@@ -297,7 +311,7 @@
                                 </div>
                               </div>
                               <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Ingresar</button>
+                                <button type="submit" class="btn btn-primary">Solicitar</button>
                               </div>
                             </form>
                           </div>

@@ -10,17 +10,16 @@
 	- Crear usuario tics en postgresql
 	- Crear bdd tics en postgresql
 	- Asignar permisos de tics sobre la bdd creada
-	- Ejecutar el archivo setup.py con python3 (Configuración de tablas)
-	- Ejecutar el archivo seed.py con python3 (Inicialización de valores predeterminados)
-	- Levantar el servidor con permisos de administrador (Debido a que utiliza el puerto 80)  con sudo en ubuntu por ejemplo.
+	- Ejecutar el archivo setup.py con python3 (Configuración de tablas) :
+		```bash
+		python3 setup.py
+		```		
+	- Ejecutar el archivo seed.py con python3 (Inicialización de valores predeterminados):
+		```bash
+		python3 seed.py
+		```		
+	- Levantar el servidor con permisos de administrador (Debido a que utiliza el puerto 80)  con sudo en ubuntu por ejemplo ejecutando el archivo run.py con python3.py:
+		```bash
+		sudo python3 run.py
+		```		
 	- Abrir página en cualquier navegador con las ruta localhost o 0.0.0.0
-	- ```python
-	  s = "Python syntax highlighting"
-	  print(s)
-	  ```
-	  
-| Food  | Calories | Tasty? |
-|-------|---------:|:------:|
-| Apple |    95    | Yes    |
-| Pear  |   102    | Yes    |
-| Hay   |   977    |        |

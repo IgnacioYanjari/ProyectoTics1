@@ -23,3 +23,5 @@
 		sudo python3 run.py
 		```		
 	- Abrir página en cualquier navegador con las ruta localhost o 0.0.0.0
+	
+	![alt text](https://github.com/IgnacioYanjari/ProyectoTics1/blob/master/Imagenes/Pagina_Web.png"Logo Title Text 1")

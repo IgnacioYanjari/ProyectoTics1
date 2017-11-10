@@ -14,6 +14,6 @@
 	- Ejecutar el archivo seed.py con python3 (Inicialización de valores predeterminados)
 	- Levantar el servidor con permisos de administrador (Debido a que utiliza el puerto 80)  con sudo en ubuntu por ejemplo.
 	- Abrir página en cualquier navegador con las ruta localhost o 0.0.0.0
-```.sh
+```sh
 python app.py
 ```

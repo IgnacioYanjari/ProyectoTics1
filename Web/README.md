@@ -18,3 +18,9 @@
 	  s = "Python syntax highlighting"
 	  print(s)
 	  ```
+	  
+| Food  | Calories | Tasty? |
+|-------|---------:|:------:|
+| Apple |    95    | Yes    |
+| Pear  |   102    | Yes    |
+| Hay   |   977    |        |

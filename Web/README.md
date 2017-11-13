@@ -15,8 +15,8 @@
 		python3 setup.py
 		```		
 	- Ejecutar el archivo seed.py con python3 (Inicialización de valores predeterminados):
-		```bash
-		python3 seed.py
+		```python
+		python3 seed.py def: Structure1
 		```		
 	- Levantar el servidor con permisos de administrador (Debido a que utiliza el puerto 80)  con sudo en ubuntu por ejemplo ejecutando el archivo run.py con python3.py:
 		```bash

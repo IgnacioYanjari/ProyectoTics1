@@ -136,71 +136,21 @@
               </div>
             </div>
 
-            <!-- /.row -->
-            <!--
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>Sugerencias!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Mas Detalles</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-support fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
-                                    <div>Alertas!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Mas Detalles</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-          -->
-
             <div class="row">
               <div class="panel panel-default">
                 <div class="panel-heading text-center">
                     <i class="fa fa-edit"></i> Agregar Peces
                 </div>
                 <div class="panel-body">
-                  <form class="" action="data" method="post">
+                  <form  action="index" method="post">
                     <div class="row">
-
                       <div class="col-lg-4 col-md-4">
                         <div class="form-group text-center">
                           <label for="sel1">Tipo de agua:</label>
                           <select class="form-control" id="sel1" name="tipo_agua">
-                            <option class="text-center">Tropical</option>
-                            <option>2</option>
+                            {% for tipo in tipo_agua2 %}
+                                <option value="{{tipo[0]}}">{{tipo[0]}}</option>
+                            {% endfor %}
                           </select>
                         </div>
                       </div>
@@ -209,10 +159,9 @@
                         <div class="form-group text-center">
                           <label for="sel1">Tipo de pez:</label>
                           <select class="form-control" id="sel1" name="tipo_pez">
-                            <option>Esturión</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
+                            {% for nombre in nombres_aceptados %}
+                            <option value="{{nombre[0]}}">{{nombre[0]}}</option>
+                            {% endfor%}
                           </select>
                         </div>
                       </div>

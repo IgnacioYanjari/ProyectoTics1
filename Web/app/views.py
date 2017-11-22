@@ -1,7 +1,7 @@
 from app import app
 from datetime import datetime , time , date
-from flask import render_template,request,redirect
-import psycopg2
+from flask import jsonify,render_template,request,redirect
+import psycopg2,random
 
 from config import *
 conn = psycopg2.connect("dbname=%s host=%s user=%s password=%s"%(database,host,user,password))
@@ -45,5 +45,7 @@ def data():
         temp = request.args['temperatura']
         ph = request.args['ph']
         print("Paquete recibido en : " , datetime.now().second ,"temperatura : ", temp , "ph : " ,ph)
-        return render_template("index.html",temperatura=temp,ph=ph)
-    return render_template("index.html",temperatura=temp,ph=ph,ec=ec)
+        return jsonify(temp=str(random.randint(1,1000000)))
+        #return jsonify(temperatura=temp,ph=ph)
+    return 0
+    #return render_template("index.html",temperatura=temp,ph=ph,ec=ec)

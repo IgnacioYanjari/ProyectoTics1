@@ -7,6 +7,8 @@ from config import *
 conn = psycopg2.connect("dbname=%s host=%s user=%s password=%s"%(database,host,user,password))
 cur = conn.cursor()
 
+
+
 @app.route('/')
 @app.route('/index',methods=['POST'])
 def index():
@@ -39,6 +41,7 @@ def index():
 
     return render_template("index.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger)
 
+
 @app.route('/data',methods=['GET','POST'])
 def data():
     global temp
@@ -49,4 +52,8 @@ def data():
         print("Paquete recibido en : " , datetime.now().second ,"temperatura : ", temp , "ph : " ,ph)
         return jsonify(temperatura=temp,ph=ph)
     elif request.method == 'POST':
+        temp=temp
+        ph=ph
+        return jsonify(temperatura=temp,ph=ph)
+    else:
         return jsonify(temperatura=temp,ph=ph)

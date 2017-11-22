@@ -4,6 +4,7 @@
 
 <head>
 
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,6 +27,9 @@
 
     <!-- Custom Fonts -->
     <link href="../static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Jquery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -114,14 +118,15 @@
                 <div class="panel-body text-center">
                   {% block content %}
 
-                      <p id="data_temp"> No funciona </p>
-                      <p id="data_ph"> No funciona </p>
+                      <p id="data_temp"> ....... </p>
+                      <p id="data_ph"> ....... </p>
 
                       <script type="text/javascript">
 
                           $(document).ready(function () {
                               setInterval("ajaxs()", 1000)
                           });
+
                           function ajaxs() {
                               $.ajax({
                                   type: "POST",
@@ -132,8 +137,8 @@
                                       $('#data_ph').text(data.ph)
                                   }
                               });
-
                           }
+
 
                       </script>
 

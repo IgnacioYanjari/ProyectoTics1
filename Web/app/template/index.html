@@ -109,29 +109,35 @@
             <div class="row">
               <div class="panel panel-primary">
                 <div class="panel-heading text-center">
-                  Testing ajax
+                  Testing JQuery
                 </div>
                 <div class="panel-body text-center">
-                  <!--{% block content %}-->
+                  {% block content %}
+
                       <p id="data_temp"> No funciona </p>
                       <p id="data_ph"> No funciona </p>
-                      <script type="text/javascript">
-                          $(document).ready(function () {
-                              setInterval("testing()", 1)
-                          });
 
-                          function testing() {
+                      <script type="text/javascript">
+
+                          $(document).ready(function () {
+                              setInterval("ajaxs()", 1000)
+                          });
+                          function ajaxs() {
                               $.ajax({
-                                  type: "GET",
+                                  type: "POST",
                                   url: '/data',
                                   async: true,
                                   success: function (data) {
-                                      $("#result").text(data.temp)
+                                      $("#data_temp").text(data.temperatura)
+                                      $('#data_ph').text(data.ph)
                                   }
                               });
+
                           }
+
                       </script>
-                  <!--{% endblock %}-->
+
+                  {% endblock %}
                 </div>
               </div>
             </div>

@@ -41,11 +41,12 @@ def index():
 
 @app.route('/data',methods=['GET','POST'])
 def data():
+    global temp
+    global ph
     if request.method == 'GET':
-        temp = request.args['temperatura']
-        ph = request.args['ph']
+        temp = request.args.get('temperatura')
+        ph = request.args.get('ph')
         print("Paquete recibido en : " , datetime.now().second ,"temperatura : ", temp , "ph : " ,ph)
-        return jsonify(temp=str(random.randint(1,1000000)))
-        #return jsonify(temperatura=temp,ph=ph)
-    return 0
-    #return render_template("index.html",temperatura=temp,ph=ph,ec=ec)
+        return jsonify(temperatura=temp,ph=ph)
+    elif request.method == 'POST':
+        return jsonify(temperatura=temp,ph=ph)

@@ -109,44 +109,8 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <!--Datos recibidos en tiempo real -->
-            <div class="row">
-              <div class="panel panel-primary">
-                <div class="panel-heading text-center">
-                  Testing JQuery
-                </div>
-                <div class="panel-body text-center">
-                  {% block content %}
 
-                      <p id="data_temp"> ....... </p>
-                      <p id="data_ph"> ....... </p>
-
-                      <script type="text/javascript">
-
-                          $(document).ready(function () {
-                              setInterval("ajaxs()", 1000)
-                          });
-
-                          function ajaxs() {
-                              $.ajax({
-                                  type: "POST",
-                                  url: '/data',
-                                  async: true,
-                                  success: function (data) {
-                                      $("#data_temp").text(data.temperatura)
-                                      $('#data_ph').text(data.ph)
-                                  }
-                              });
-                          }
-
-
-                      </script>
-
-                  {% endblock %}
-                </div>
-              </div>
-            </div>
-
+            <!-- Datos en tiempo real -->
             <div class="row">
               <div class="panel panel-default">
                 <div class="panel-heading text-center">
@@ -159,7 +123,7 @@
                         Ph
                       </div>
                       <div class="panel-body">
-                        {{ph}}
+                        <p id="data_temp">...</p>
                       </div>
                     </div>
                   </div>
@@ -169,13 +133,32 @@
                         Temperatura  (°C)
                       </div>
                       <div class="panel-body">
-                        {{temperatura}}
+                        <p id="data_ph">...</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    setInterval("ajaxs()", 1000)
+                });
+
+                function ajaxs() {
+                    $.ajax({
+                        type: "POST",
+                        url: '/data',
+                        async: true,
+                        success: function (data) {
+                            $("#data_temp").text(data.temperatura)
+                            $('#data_ph').text(data.ph)
+                        }
+                    });
+                }
+            </script>
+
 
             <div class="row">
               <div class="panel panel-default">

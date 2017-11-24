@@ -52,8 +52,6 @@ def data():
         print("Paquete recibido en : " , datetime.now().second ,"temperatura : ", temp , "ph : " ,ph)
         return jsonify(temperatura=temp,ph=ph)
     elif request.method == 'POST':
-        temp=temp
-        ph=ph
         return jsonify(temperatura=temp,ph=ph)
     else:
         return jsonify(temperatura=temp,ph=ph)

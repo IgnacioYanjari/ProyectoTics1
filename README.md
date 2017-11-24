@@ -1,5 +1,5 @@
 # ProyectoTics1
-1. Tareas Por Hacer
+- Tareas Por Hacer
   2. Modelamiento de la caja (Prototipo)
   3. Agregar a la página el seleccionador de peceras
   4. Generar el gráfico

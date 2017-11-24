@@ -36,7 +36,6 @@ def index():
             danger = 1
         else:
             danger=2
-        #print("nombre :",nombre_send ,"tipo agua :",tipoagua_send , "nombre aceptado : ",tipopez_send)
         return render_template("index.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger)
 
     return render_template("index.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger)

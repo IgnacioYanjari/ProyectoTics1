@@ -499,4 +499,12 @@ tipo_pez , nombre_tipo , tipo_agua;
 cur.execute(sql)
 conn.commit()
 
+#Iniciamos la pecera
+sql="""
+insert into pecera(id,nombre) values
+('1','Pecera1')
+"""
+
+
+
 conn.close()

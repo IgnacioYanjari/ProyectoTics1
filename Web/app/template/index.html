@@ -26,11 +26,13 @@
           </thead>
           <tbody>
             <tr>
-              <td class="text-center">John</td>
-              <td class="text-center">Doe</td>
+              {% for elem in lista %}
+              <td class="text-center">{{elem[1]}}</td>
+              <td class="text-center">{{elem[0]}}</td>
               <td class="text-center">
-                <a href="/pecera?numero=1" class="glyphicon glyphicon-plus" style="text-decoration: none;" role="button"></a>
+                <a href="/pecera?numero={{elem[1]}}" class="glyphicon glyphicon-plus" style="text-decoration: none;" role="button"></a>
               </td>
+              {% endfor %}
             </tr>
           </tbody>
         </table>
@@ -50,7 +52,10 @@
           <div class="col-lg-4"></div>
           <div class="col-lg-4">
             <div class="form-group text-center">
-              <label for="sel1">Ingresar Nombre de la pecera:</label>
+              <div class="page-header text-center">
+                <label for="sel1">Ingresar Nombre de la pecera:</label>
+              </div>
+
               <br>
               <input type="name" name="nombre_pecera" class="form-control">
             </div>

@@ -12,6 +12,14 @@ cur = conn.cursor()
 @app.route('/')
 @app.route('/index',methods=['POST'])
 def index():
+    sql="""SELECT nombre,id FROM peceras;"""
+    cur.execute(sql)
+    listas = cur.fetchall()
+    return render_template("index.html",lista=listas)
+
+
+@app.route('/pecera',methods=['POST','GET'])
+def pecera():
     sql = """ SELECT tipo_agua FROM tipos_aceptados GROUP BY tipo_agua;"""
     cur.execute(sql)
     tipo_agua = cur.fetchall()
@@ -36,9 +44,11 @@ def index():
             danger = 1
         else:
             danger=2
-        return render_template("index.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger)
+    return render_template("pecera.html",tipo_agua2 = tipo_agua ,
+                        nombres_aceptados = nombres_aceptados,danger=danger)
 
-    return render_template("index.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger)
+    return render_template("pecera.html",tipo_agua2 = tipo_agua ,
+                        nombres_aceptados = nombres_aceptados,danger=danger)
 
 
 @app.route('/data',methods=['GET','POST'])

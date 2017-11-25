@@ -501,10 +501,11 @@ conn.commit()
 
 #Iniciamos la pecera
 sql="""
-insert into pecera(id,nombre) values
+insert into peceras(id,nombre) values
 ('1','Pecera1')
 """
-
+cur.execute(sql)
+conn.commit()
 
 
 conn.close()

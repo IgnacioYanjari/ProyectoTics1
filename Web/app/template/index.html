@@ -1,393 +1,107 @@
+{% extends "plantilla.html"%}
+{% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Pecera v1.0</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
-    <link href="../static/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="../static/dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="../static/vendor/morrisjs/morris.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="../static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Jquery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-    <div id="wrapper">
-
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href=""> Administración Pecera v1.0</a>
-            </div>
-            <!-- /.navbar-header -->
-
-            <ul class="nav navbar-top-links navbar-right">
-                 <!--/.dropdown-->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Usuario </a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuración </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión </a>
-                        </li>
-                    </ul>
-                     <!--/.dropdown-user-->
-                </li>
-                 <!--/.dropdown-->
-            </ul>
-
-            <!-- /.navbar-top-links -->
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-                        <li>
-                            <a href=""><i class="fa fa-dashboard fa-fw"></i> Información adicional </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
-
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h1 class="page-header">Administración pecera juanito :)</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-
-            <!-- Datos en tiempo real -->
-            <div class="row">
-              <div class="panel panel-default">
-                <div class="panel-heading text-center">
-                    <i  class="fa fa-bar-chart-o fa-fw"></i> Datos en tiempo real
-                </div>
-                <div class="panel-body ">
-                  <div class="col-lg-6 text-center">
-                    <div class="panel panel-primary">
-                      <div class="panel-heading text-center">
-                        Ph
-                      </div>
-                      <div class="panel-body">
-                        <p id="data_temp">...</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 text-center">
-                    <div class="panel panel-primary">
-                      <div class="panel-heading text-center">
-                        Temperatura  (°C)
-                      </div>
-                      <div class="panel-body">
-                        <p id="data_ph">...</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    setInterval("ajaxs()", 1000)
-                });
-
-                function ajaxs() {
-                    $.ajax({
-                        type: "POST",
-                        url: '/data',
-                        async: true,
-                        success: function (data) {
-                            $("#data_temp").text(data.temperatura)
-                            $('#data_ph').text(data.ph)
-                        }
-                    });
-                }
-            </script>
-
-            <div class="row">
-              <div class="panel panel-default">
-                <div class="panel-heading text-center">
-                    <i class="fa fa-edit"></i> Agregar Peces
-                </div>
-                <div class="panel-body">
-                  <form  action="index" method="post">
-
-                    <div class="row">
-                      <div class="col-lg-4 col-md-4">
-                        <div class="form-group text-center">
-                          <label for="sel1">Tipo de agua:</label>
-                          <select class="form-control" id="sel1" name="tipo_agua">
-                            {% for tipo in tipo_agua2 %}
-                                <option value="{{tipo[0]}}">{{tipo[0]}}</option>
-                            {% endfor %}
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="col-lg-4 col-md-4">
-                        <div class="form-group text-center">
-                          <label for="sel2">Tipo de pez:</label>
-                          <select class="form-control" id="sel2" name="tipo_pez" >
-                            {% for nombre in nombres_aceptados %}
-                            <option value="{{nombre[0]}}">{{nombre[0]}}</option>
-                            {% endfor%}
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="col-lg-4 col-md-4">
-                        <div class="form-group text-center">
-                          <label for="msg">Nombre Pez:</label>
-                          <input id="msg" type="text" class="form-control" name="nombre_pez" placeholder="Nombre Pez">
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Ingresar</button>
-                    </div>
-                  </form>
-                </div>
-
-              </div>
-            </div>
-            <div class="row">
-              {% if danger == -1 %}
-              <div class="alert alert-danger text-center">
-                <strong>No existe pez de ese tipo de pez con esas caracteristicas!</strong>
-              </div>
-              {% elif danger == 1  %}
-              <div class="alert alert-success text-center">
-                <strong>Pez agregado correctamente</strong>
-              </div>
-              {% endif %}
-
-            </div>
-
-
-
-
-            <div class="row">
-                <div class="panel panel-default">
-                  <div class="panel-heading text-center">
-                    <i class="fa fa-pencil-square-o" ></i> Editar Volumen de la pecera (cm)
-                  </div>
-
-                  <div class="panel-body">
-                    <form  action="index" method="post">
-
-                      <div class="row">
-                        <div class="col-lg-4 col-md-4">
-                          <div class="form-group text-center">
-                            <label for="sel1">Ingresar Ancho:</label>
-                            <br>
-                            <input type="number" name="quantity" min="100" max="1000" value="100" class="form-control">
-                          </div>
-                        </div>
-                        <div class="col-lg-4">
-                        <div class="form-group text-center">
-
-                          <div class="row">
-                            <label for="sel1">Ingresar Largo:</label>
-                            <br>
-                            <input type="number" name="quantity" min="100" max="1000" value="100" class="form-control">
-                          </div>
-                          <br>
-                          <div class="row">
-                            <div class="text-center">
-                              <button type="submit" class="btn btn-primary">Ingresar</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                        <div class="col-lg-4">
-                          <div class="form-group text-center">
-                            <label for="sel1">Ingresar Altura:</label>
-                            <br>
-                            <input type="number" name="quantity" min="100" max="1000" value="100" class="form-control">
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-
-                </div>
-            </div>
-<!--
-            <div class="row text-center">
-              <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-            </div>
-
-            <div class="modal fade" id="myModal" role="dialog">
-              <div class="modal-dialog  modal-lg modal-rm">
-                <div class="alert alert-danger">
-                  <!-- Modal content
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title"> Alerta Cambio en Variable : </h4>
-                    </div>
-                    <div class="modal-body">
-                      <p> ¡¡ Valor de Ph Muy alto para peces viviendo en la pecera !!</p>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-        -->
-
-
-            <!-- /.row -->
-            <div id="#graficos"class="row">
-                <div class="panel panel-default">
-                    <div class="panel-heading text-center">
-                        <i class="fa fa-bar-chart-o fa-fw"></i> Solicitar Graficos
-                    </div>
-                    <!-- /.panel-heading -->
-                  <div class="panel-body">
-                        <div class="panel panel-primary">
-                              <div class="panel-heading text-center">
-                                <i class="fa fa-edit"></i> Editar Intervalo
-                              </div>
-                              <div class="panel-body">
-                                <form class="" action="index.html" method="post">
-                                  <div class="row">
-                                    <div class="col-lg-12 col-md-12">
-                                      <div class="form-group text-center">
-                                        <label for="sel1">Tiempo Inicio:</label>
-                                          <input type="date" vale="tiempo_final">
-                                      </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12">
-                                      <div class="form-group text-center">
-                                        <label for="sel1">Tiempo Final:</label>
-                                        <input type="date" vale="tiempo_final">
-                                      </div>
-                                    <div class="col-lg-12">
-                                      <div class="form-group text-center">
-                                        <label>Variable a graficar:</label>
-                                        <div class="radio">
-                                          <input type="radio" name="gender" value="temperatura" checked>Temperatura<br>
-                                        </div>
-                                        <div class="radio">
-                                          <input type="radio" name="gender" value="ph">Ph<br>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Solicitar</button>
-                                  </div>
-                                </form>
-                              </div>
-                          </div>
-                        </div>
-
-                        <div class="panel panel-primary">
-                          <div class="panel-heading text-center">
-                            <i class="fa fa-area-chart"></i> Resultado de consulta
-                          </div>
-                          <div class="panel-body">
-                              <div id="morris-area-chart"></div>
-                          </div>
-                        </div>
-
-
-                      </div>
-
-                  </div>
-
-                </div>
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /#page-wrapper -->
-
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h1 class="page-header"> Seleccionar pecera a monitorear o visualizar</h1>
     </div>
-    <!-- /#wrapper -->
+    <!-- /.col-lg-12 -->
+</div>
 
-    <!-- jQuery -->
-    <script src="../static/vendor/jquery/jquery.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<div class="row">
+  <div class="panel panel-primary">
+    <div class="panel-heading text-center">
+      Lista de Peceras ingresadas :
+    </div>
+    <div class="panel-body center-block">
+      <div class="container-fluid">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="text-center"> Numero de Pecera Ingresada </th>
+              <th class="text-center"> Nombre de la pecera </th>
+              <th class="text-center"> Más Información </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center">John</td>
+              <td class="text-center">Doe</td>
+              <td class="text-center">
+                <a href="/pecera?numero=1" class="glyphicon glyphicon-plus" style="text-decoration: none;" role="button"></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../static/vendor/metisMenu/metisMenu.min.js"></script>
+<div class="row">
+    <div class="panel panel-primary">
+      <div class="panel-heading text-center">
+        <i class="fa fa-pencil-square-o" ></i> Ingresar Pecera nueva
+      </div>
+      <div class="panel-body">
+        <form  action="index" method="post">
+        <div class="col-xs-12">
+          <div class="col-lg-4"></div>
+          <div class="col-lg-4">
+            <div class="form-group text-center">
+              <label for="sel1">Ingresar Nombre de la pecera:</label>
+              <br>
+              <input type="name" name="nombre_pecera" class="form-control">
+            </div>
+          </div>
+          <div class="col-lg-4"></div>
+        </div>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="../static/vendor/raphael/raphael.min.js"></script>
-    <script src="../static/vendor/morrisjs/morris.min.js"></script>
-    <script src="../static/data/morris-data.js"></script>
+        <div class="col-xs-12">
+          <div class="page-header text-center">
+            <label>Ingresar Dimensiones de la pecera (cm) </label>
+          </div>
+          <br>
+        </div>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="../static/dist/js/sb-admin-2.js"></script>
+        <div class="col-xs-12">
+            <div class="row">
+              <div class="col-lg-4 col-md-4">
+                <div class="form-group text-center">
+                  <label for="sel1">Ingresar Ancho:</label>
+                  <br>
+                  <input type="number" name="Ancho" min="100" max="1000" value="100" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-4">
+              <div class="form-group text-center">
+                <label for="sel1">Ingresar Largo:</label>
+                <br>
+                <input type="number" name="Largo" min="100" max="1000" value="100" class="form-control">
+              </div>
+            </div>
+              <div class="col-lg-4">
+                <div class="form-group text-center">
+                  <label for="sel1">Ingresar Altura:</label>
+                  <br>
+                  <input type="number" name="quantity" min="100" max="1000" value="100" class="form-control">
+                </div>
+              </div>
+              <div class="row">
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Ingresar</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
-</body>
 
-</html>
+
+</div>
+<!-- /.row -->
+{% endblock%}

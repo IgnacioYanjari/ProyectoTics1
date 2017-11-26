@@ -3,7 +3,7 @@
 
 <div class="row">
     <div class="col-lg-12 text-center">
-        <h1 class="page-header"> Seleccionar pecera a monitorear o visualizar</h1>
+        <h1 class="page-header"> Seleccionar pecera a monitorear</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -15,28 +15,42 @@
       Lista de Peceras ingresadas :
     </div>
     <div class="panel-body center-block">
-      <div class="container-fluid">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th class="text-center"> Numero de Pecera Ingresada </th>
-              <th class="text-center"> Nombre de la pecera </th>
-              <th class="text-center"> Más Información </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {% for elem in lista %}
-              <td class="text-center">{{elem[1]}}</td>
-              <td class="text-center">{{elem[0]}}</td>
-              <td class="text-center">
-                <a href="/pecera?numero={{elem[1]}}" class="glyphicon glyphicon-plus" style="text-decoration: none;" role="button"></a>
-              </td>
-              {% endfor %}
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th class="text-center"> Numero de Pecera Ingresada </th>
+            <th class="text-center"> Nombre de la pecera </th>
+            <th class="text-center"> Largo (cm)</th>
+            <th class="text-center"> Ancho (cm)</th>
+            <th class="text-center"> Alto (cm)</th>
+            <th class="text-center"> Más Información </th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for elem in lista %}
+          {% if elem[1] == 1 %}
+          <tr>
+            <td class="text-center">{{elem[1]}}</td>
+            <td class="text-center">{{elem[0]}}</td>
+            <td class="text-center">{{elem[2]}}</td>
+            <td class="text-center">{{elem[3]}}</td>
+            <td class="text-center">{{elem[4]}}</td>
+            <td class="text-center">
+              <a href="/pecera?numero={{elem[1]}}" class="glyphicon glyphicon-plus" style="text-decoration: none;" role="button"></a>
+            </td>
+          </tr>
+          {% else %}
+          <tr class="danger">
+            <td class="text-center">{{elem[1]}}</td>
+            <td class="text-center">{{elem[0]}}</td>
+            <td class="text-center">{{elem[2]}}</td>
+            <td class="text-center">{{elem[3]}}</td>
+            <td class="text-center">{{elem[4]}}</td>
+          </tr>
+          {% endif %}
+        {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

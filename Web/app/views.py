@@ -11,7 +11,7 @@ cur = conn.cursor()
 @app.route('/')
 @app.route('/index',methods=['POST'])
 def index():
-    sql="""SELECT nombre,id FROM peceras;"""
+    sql="""SELECT nombre,id,largo,ancho,alto FROM peceras;"""
     cur.execute(sql)
     listas = cur.fetchall()
     return render_template("index.html",lista=listas)

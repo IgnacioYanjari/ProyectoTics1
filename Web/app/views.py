@@ -14,7 +14,28 @@ def index():
     sql="""SELECT nombre,id,largo,ancho,alto FROM peceras;"""
     cur.execute(sql)
     listas = cur.fetchall()
+
+    if request.method == 'POST':
+        nombre_pecera = request.form['nombre_pecera']
+        largo_pecera = request.form['Largo']  
+        ancho_pecera = request.form['Ancho']
+        altura_pecera = request.form['quantity']
+        exito = 0
+
+        sql = """select count(nombre) from peceras where nombre='%s'; """%(nombre_pecera)
+        cur.execute(sql)
+        nombre = cur.fetchone()
+        if nombre[0] == 0:
+            sql = """INSERT INTO peceras(nombre, largo, alto, ancho) VALUES ('%s', %s, %s, %s);"""%(nombre_pecera, largo_pecera, altura_pecera, ancho_pecera)
+            cur.execute(sql)
+            exito = 1
+        sql="""SELECT nombre,id,largo,ancho,alto FROM peceras;"""
+        cur.execute(sql)
+        listas = cur.fetchall()
+        return render_template("index.html",lista=listas, nombre=nombre, exito=exito)
+
     return render_template("index.html",lista=listas)
+
 
 
 @app.route('/pecera',methods=['POST','GET'])

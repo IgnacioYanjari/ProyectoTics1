@@ -114,6 +114,24 @@
               </div>
             </div>
           </form>
+
+        {% if exito == 0 %}
+        <br>
+        <div class ="col-xs-12">
+          <div class="alert alert-danger text-center">
+            <strong>No se puede agregar la pecera</strong>
+          </div>
+        </div>
+        {% endif %}
+        {% if exito == 1 %}
+        <br>
+        <div class ="col-xs-12">
+          <div class="alert alert-success text-center">
+            <strong>Pecera agregada correctamente</strong>
+          </div>
+        </div>
+        {% endif %}
+
         </div>
       </div>
     </div>

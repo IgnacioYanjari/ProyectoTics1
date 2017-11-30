@@ -9,25 +9,26 @@ cur = conn.cursor()
 
 
 @app.route('/')
-@app.route('/index',methods=['POST'])
+@app.route('/index',methods=['POST','GET'])
 def index():
     sql="""SELECT nombre,id,largo,ancho,alto FROM peceras;"""
     cur.execute(sql)
     listas = cur.fetchall()
-
     if request.method == 'POST':
         nombre_pecera = request.form['nombre_pecera']
-        largo_pecera = request.form['Largo']  
+        largo_pecera = request.form['Largo']
         ancho_pecera = request.form['Ancho']
         altura_pecera = request.form['quantity']
         exito = 0
-
-        sql = """select count(nombre) from peceras where nombre='%s'; """%(nombre_pecera)
+        sql = """SELECT nombre FROM peceras WHERE nombre='%s'; """%(nombre_pecera)
         cur.execute(sql)
         nombre = cur.fetchone()
-        if nombre[0] == 0:
-            sql = """INSERT INTO peceras(nombre, largo, alto, ancho) VALUES ('%s', %s, %s, %s);"""%(nombre_pecera, largo_pecera, altura_pecera, ancho_pecera)
+        print (nombre , "nombre_pecera : ", nombre_pecera)
+        if nombre == None and len(nombre_pecera) > 0:
+            sql = """insert into peceras (nombre, largo, ancho,alto) values (('%s'), ('%s'), ('%s'), ('%s'));
+            """%(nombre_pecera,largo_pecera, altura_pecera, ancho_pecera)
             cur.execute(sql)
+            conn.commit()
             exito = 1
         sql="""SELECT nombre,id,largo,ancho,alto FROM peceras;"""
         cur.execute(sql)
@@ -38,8 +39,8 @@ def index():
 
 
 
-@app.route('/pecera',methods=['POST','GET'])
-def pecera():
+@app.route('/pecera/<id_pecera>',methods=['POST','GET'])
+def pecera(id_pecera):
     sql = """ SELECT tipo_agua FROM tipos_aceptados GROUP BY tipo_agua;"""
     cur.execute(sql)
     tipo_agua = cur.fetchall()
@@ -53,7 +54,7 @@ def pecera():
         tipopez_send = request.form['tipo_pez']
         print("tipo agua : ", tipoagua_send,"tipo pez :",tipopez_send)
         sql=""" SELECT tipo_pez FROM tipos_aceptados WHERE
-        tipo_agua = '%s' and nombre_tipo ='%s';"""%(tipoagua_send , tipopez_send)
+        tipo_agua = '%s' and nombre_tipo ='%s' and pecera_id = '%s';"""%(tipoagua_send , tipopez_send , id_pecera)
         print(sql)
         cur.execute(sql)
         danger = cur.fetchall()

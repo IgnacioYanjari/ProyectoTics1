@@ -36,7 +36,7 @@
             <td class="text-center">{{elem[3]}}</td>
             <td class="text-center">{{elem[4]}}</td>
             <td class="text-center">
-              <a href="/pecera?numero={{elem[1]}}" class="glyphicon glyphicon-plus" style="text-decoration: none;" role="button"></a>
+              <a href="/pecera/{{elem[1]}}" class="glyphicon glyphicon-plus" style="text-decoration: none;" role="button"></a>
             </td>
           </tr>
           {% else %}
@@ -71,7 +71,7 @@
               </div>
 
               <br>
-              <input type="name" name="nombre_pecera" class="form-control">
+              <input type="name" placeholder="nombre pecera" name="nombre_pecera" class="form-control">
             </div>
           </div>
           <div class="col-lg-4"></div>
@@ -90,7 +90,7 @@
                 <div class="form-group text-center">
                   <label for="sel1">Ingresar Ancho:</label>
                   <br>
-                  <input type="number" name="Ancho" min="100" max="1000" value="100" class="form-control">
+                  <input type="float" name="Ancho" min="100" max="1000" value="100" class="form-control">
                 </div>
               </div>
               <div class="col-lg-4">

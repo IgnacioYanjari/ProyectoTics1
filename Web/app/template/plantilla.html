@@ -85,6 +85,9 @@
                         <li>
                           <a href="/index"> <i class="fa fa-tasks"></i> Página Principal </a>
                         </li>
+                        <li>
+                          {% block link %}{% endblock %}
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -97,7 +100,6 @@
         <div id="page-wrapper">
           <div class="container-fluid">
             {% block content %}
-
             {% endblock%}
           </div>
         </div>

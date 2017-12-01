@@ -45,44 +45,41 @@ def index():
 
 @app.route('/pecera/<id_pecera>',methods=['POST','GET'])
 def pecera(id_pecera):
-    sql = """ SELECT tipo_agua FROM tipos_aceptados GROUP BY tipo_agua;"""
-    cur.execute(sql)
-    tipo_agua = cur.fetchall()
-    sql="""SELECT nombre_tipo,tipo_agua FROM tipos_aceptados """
-    cur.execute(sql)
-    nombres_aceptados = cur.fetchall()
-    danger=2
-    if request.method == 'POST':
-        nombre_send = request.form['nombre_pez']
-        tipoagua_send = request.form['tipo_agua']
-        tipopez_send = request.form['tipo_pez']
-        print("tipo agua : ", tipoagua_send,"tipo pez :",tipopez_send)
-        sql=""" SELECT tipo_pez FROM tipos_aceptados WHERE
-        tipo_agua = '%s' and nombre_tipo ='%s' and pecera_id = '%s';"""%(tipoagua_send , tipopez_send , id_pecera)
-        print(sql)
-        cur.execute(sql)
-        danger = cur.fetchall()
-        print(danger)
-        if len(danger) == 0:
-            danger = -1
-        elif len(danger) == 1:
-            danger = 1
-        else:
-            danger=2
-    return render_template("pecera.html",tipo_agua2 = tipo_agua ,
-                        nombres_aceptados = nombres_aceptados,danger=danger)
-
-    return render_template("pecera.html",tipo_agua2 = tipo_agua ,
-                        nombres_aceptados = nombres_aceptados,danger=danger)
+    return render_template("pecera.html")
 
 
-@app.route('/peces')
-def peces():
-    #sql = """select id,tipo_pez,nombre_pez from peces;"""
-    #cur.execute(sql)
-    #lista_peces = cur.fetchall()
-    lista_peces=[["id1","tipo_pez1","nombre_pez1"],["id2","tipo_pez2","nombre_pez2"]]
-    return render_template("peces.html",peces=lista_peces)
+@app.route('/peces/<id_pecera>',methods=['POST','GET'])
+def peces(id_pecera):
+	lista_peces=[["id1","tipo_pez1","nombre_pez1"],["id2","tipo_pez2","nombre_pez2"]]
+	#sql = """select id,tipo_pez,nombre_pez from peces;"""
+	#cur.execute(sql)
+	#lista_peces = cur.fetchall()
+	sql = """ SELECT tipo_agua FROM tipos_aceptados GROUP BY tipo_agua;"""
+	cur.execute(sql)
+	tipo_agua = cur.fetchall()
+	sql="""SELECT nombre_tipo,tipo_agua FROM tipos_aceptados """
+	cur.execute(sql)
+	nombres_aceptados = cur.fetchall()
+	danger=2
+	if request.method == 'POST':
+		nombre_send = request.form['nombre_pez']
+		tipoagua_send = request.form['tipo_agua']
+		tipopez_send = request.form['tipo_pez']
+		print("tipo agua : ", tipoagua_send,"tipo pez :",tipopez_send)
+		sql=""" SELECT tipo_pez FROM tipos_aceptados WHERE
+		tipo_agua = '%s' and nombre_tipo ='%s' and pecera_id = '%s';"""%(tipoagua_send , tipopez_send , id_pecera)
+		print(sql)
+		cur.execute(sql)
+		danger = cur.fetchall()
+		print(danger)
+		if len(danger) == 0:
+			danger = -1
+		elif len(danger) == 1:
+			danger = 1
+		else:
+			danger=2
+		return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)
+	return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)
 
 
 

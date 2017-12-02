@@ -20,21 +20,20 @@ def index():
     listas = cur.fetchall()
     if request.method == 'POST':
         nombre_pecera = request.form['nombre_pecera']
-        largo_pecera = request.form['Largo']
-        ancho_pecera = request.form['Ancho']
-        altura_pecera = request.form['quantity']
+        galones_pecera = request.form['galones']
+        litros_pecera = request.form['litros']
         exito = 0
         sql = """SELECT nombre FROM peceras WHERE nombre='%s'; """%(nombre_pecera)
         cur.execute(sql)
         nombre = cur.fetchone()
         print (nombre , "nombre_pecera : ", nombre_pecera)
         if nombre == None and len(nombre_pecera) > 0:
-            sql = """insert into peceras (nombre, largo, ancho,alto) values (('%s'), ('%s'), ('%s'), ('%s'));
-            """%(nombre_pecera,largo_pecera, altura_pecera, ancho_pecera)
+            sql = """insert into peceras (nombre, galones, litros) values (('%s'), ('%s'), ('%s'));
+            """%(nombre_pecera,galones_pecera, litros_pecera)
             cur.execute(sql)
             conn.commit()
             exito = 1
-        sql="""SELECT nombre,id,largo,ancho,alto FROM peceras;"""
+        sql="""SELECT nombre,id,galones,litros FROM peceras;"""
         cur.execute(sql)
         listas = cur.fetchall()
         return render_template("index.html",lista=listas, nombre=nombre, exito=exito)

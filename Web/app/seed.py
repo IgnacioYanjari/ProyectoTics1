@@ -501,8 +501,8 @@ conn.commit()
 
 #Iniciamos la pecera
 sql="""
-insert into peceras(id,nombre,largo,ancho,alto) values
-('1','Pecera1','100','100','100 ')
+insert into peceras(id,nombre,galones,litros) values
+('1','Pecera1','100','100 ')
 """
 cur.execute(sql)
 conn.commit()

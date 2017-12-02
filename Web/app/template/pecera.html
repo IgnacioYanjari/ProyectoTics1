@@ -3,7 +3,6 @@
   <a href="/peces/1"> <i class="fa fa-tasks"></i> Administracion y lista de peces</a>
 {% endblock%}
 {% block content %}
-<script src="../static/js/jquery-3.1.1.min.js"></script>
 <script src="../static/plugins/highcharts/stock/highstock.js"></script>
 <script src="../static/plugins/highcharts/stock/exporting.js"></script>
 <script src="../static/plugins/highcharts/highcharts.js"></script>
@@ -49,25 +48,6 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        setInterval("ajaxs()", 1000)
-    });
-
-    function ajaxs() {
-        $.ajax({
-            type: "POST",
-            url: '/data',
-            async: true,
-            success: function (data) {
-                $("#data_temp").text(data.temperatura)
-                $('#data_ph').text(data.ph)
-            }
-        });
-    }
-</script>
-
 
 <!-- /.row -->
 <div id="#graficos"class="row">
@@ -144,7 +124,31 @@
 
 
 <script>
+
+var temperatura;
+$(document).ready(function () {
+    setInterval("ajaxs()", 1000)
+});
+
+function ajaxs() {
+    $.ajax({
+        type: "POST",
+        url: '/data',
+        async: true,
+        success: function (data) {
+            temperatura = data.temperatura
+            $("#data_temp").text(data.temperatura)
+            $('#data_ph').text(data.ph)
+        }
+    });
+}
+
 // Data generated from http://www.bikeforums.net/professional-cycling-fans/1113087-2017-tour-de-france-gpx-tcx-files.html
+Highcharts.setOptions({
+    global: {
+        useUTC: false
+    }
+});
 var elevationData = [
     [0.0, 20],
     [0.1, 20],
@@ -212,13 +216,16 @@ var chart1 = Highcharts.stockChart({
         renderTo: "chart1",
         events: {
             load: function () {
-
                 // set up the updating of the chart each second
+
                 var series = this.series[0];
                 setInterval(function () {
-                    var x = (new Date()).getTime(), // current time
-                        y = Math.round(Math.random() * 100);
-                    series.addPoint([x, y], true, true);
+                  console.log(temperatura)
+                      if(temperatura){
+                        var x = (new Date()).getTime(), // current time
+                        y = Math.round(temperatura);
+                        series.addPoint([x, y], true, true);
+                      }
                 }, 1000);
             }
         }

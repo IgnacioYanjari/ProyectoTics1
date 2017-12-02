@@ -151,7 +151,11 @@ Highcharts.setOptions({
         useUTC: false
     }
 });
-var elevationData = [];
+var elevationData = [
+  [0,10],
+  [0.1,15],
+  [0.3,17]
+];
 
 var chart1 = new
 Highcharts.setOptions({
@@ -161,21 +165,28 @@ Highcharts.setOptions({
 });
 
 // Create the chart
-var chart1 = Highcharts.stockChart({
+var chart1;
+
+
+Highcharts.setOptions({
+    global: {
+        useUTC: true
+    }
+});
+
+// Create the chart
+Highcharts.stockChart('chart1', {
     chart: {
-        renderTo: "chart1",
+        type: "spline",
         events: {
             load: function () {
-                // set up the updating of the chart each second
 
+                // set up the updating of the chart each second
                 var series = this.series[0];
                 setInterval(function () {
-                  console.log("temperatura : " + ph)
-                      if(temperatura){
-                        var x = (new Date()).getTime(), // current time
-                        y = Math.round(temperatura);
-                        series.addPoint([x, y], true, true);
-                      }
+                    var x = (new Date()).getTime(), // current time
+                        y = parseFloat(temperatura);
+                    series.addPoint([x, y], true, false);
                 }, 1000);
             }
         }
@@ -194,41 +205,69 @@ var chart1 = Highcharts.stockChart({
             type: 'all',
             text: 'All'
         }],
-        inputEnabled: false,
-        selected: 0
+        inputEnabled: true,
+        selected: 'all'
+    },
+
+    xAxis: {
+      title:{
+        text:'Hora'
+      },
+      type: 'datetime',
+      tickPixelInterval: 150
+    },
+    yAxis: {
+        title: {
+            text: 'Valor Recibido'
+        },
+        plotLines: [{
+            value: 0,
+            width: 1,
+            color: '#808080'
+        }]
+    },
+    tooltip: {
+        formatter: function () {
+            var s = '<b>' + Highcharts.dateFormat('%A, %b %e, %Y', this.x) + '</b>';
+
+            $.each(this.points, function () {
+                s += '<br/>temperatura = ' + this.y + '°C';
+            });
+            return s;
+        }
     },
 
     title: {
-        text: 'Gráfico de Temperatura'
+        text: 'Temperatura en tiempo real'
     },
 
     exporting: {
-        enabled: false
+        enabled: true
     },
-
     series: [{
-        data: elevationData
+        name: 'Random data',
+        data:[]
     }]
 });
 
 
 
+
+
 // Now create the chart
-var chart2 = new Highcharts.stockChart({
+var chart2;
+Highcharts.stockChart('chart2', {
     chart: {
-        renderTo: "chart1",
+        type: "spline",
         events: {
             load: function () {
-                // set up the updating of the chart each second
 
+                // set up the updating of the chart each second
                 var series = this.series[0];
                 setInterval(function () {
-                  console.log("ph : " + ph)
-                      if(ph){
-                        var x = (new Date()).getTime(), // current time
-                        y = Math.round(ph);
-                        series.addPoint([x, y], true, true);
-                      }
+                    var x = (new Date()).getTime(), // current time
+                        y = parseFloat(temperatura);
+                    series.addPoint([x, y], true, false);
                 }, 1000);
             }
         }
@@ -247,20 +286,48 @@ var chart2 = new Highcharts.stockChart({
             type: 'all',
             text: 'All'
         }],
-        inputEnabled: false,
-        selected: 0
+        inputEnabled: true,
+        selected: 'all'
+    },
+
+    xAxis: {
+      title:{
+        text:'Hora'
+      },
+      type: 'datetime',
+      tickPixelInterval: 150
+    },
+    yAxis: {
+        title: {
+            text: 'Valor Recibido'
+        },
+        plotLines: [{
+            value: 0,
+            width: 1,
+            color: '#808080'
+        }]
+    },
+    tooltip: {
+        formatter: function () {
+            var s = '<b>' + Highcharts.dateFormat('%A, %b %e, %Y', this.x) + '</b>';
+
+            $.each(this.points, function () {
+                s += '<br/>Ph = ' + this.y ;
+            });
+            return s;
+        }
     },
 
     title: {
-        text: 'Gráfico de Ph'
+        text: 'Ph en tiempo real'
     },
 
     exporting: {
-        enabled: false
+        enabled: true
     },
-
     series: [{
-        data: elevationData
+        name: 'Random data',
+        data:[]
     }]
 });
 </script>

@@ -1,16 +1,10 @@
 from app import app
-from datetime import datetime , time , date
 from flask import jsonify,render_template,request,redirect
-import psycopg2,random
+from datetime import datetime , time , date
+import psycopg2,random,time
 from app.config import *
 conn = psycopg2.connect("dbname=%s host=%s user=%s password=%s"%(database,host,user,password))
 cur = conn.cursor()
-
-@app.route('/grafico')
-def grafico():
-	return render_template('grafico.html')
-
-
 
 @app.route('/')
 @app.route('/index',methods=['POST','GET'])
@@ -44,7 +38,25 @@ def index():
 
 @app.route('/pecera/<id_pecera>',methods=['POST','GET'])
 def pecera(id_pecera):
-    return render_template("pecera.html")
+    sql = """SELECT fecha , temperatura FROM registros_historicos """
+    cur.execute(sql)
+    datos_temperatura=cur.fetchall()
+    sql = """SELECT fecha , temperatura FROM registros_historicos """
+    cur.execute(sql)
+    datos_ph = cur.fetchall()
+    aux = []
+    for elem in datos_temperatura:
+        aux2 = [int(time.mktime(elem[0].timetuple()) * 1000),elem[1]]
+        aux.append(aux2)
+    datos_temperatura = aux
+    aux = []
+    for elem in datos_ph:
+        aux2 = [int(time.mktime(elem[0].timetuple()) * 1000),elem[1]]
+        aux.append(aux2)
+    datos_ph = aux
+    print("datos_temperatura : ",datos_temperatura)
+    print("datos_ph : " , datos_ph)
+    return render_template("pecera.html" , datos_temperatura = datos_temperatura , datos_ph = datos_ph)
 
 
 @app.route('/peces/<id_pecera>',methods=['POST','GET'])
@@ -89,8 +101,12 @@ def data():
     if request.method == 'GET':
         temp = request.args.get('temperatura')
         ph = request.args.get('ph')
-        print("Paquete recibido en : " , datetime.now().second ,"temperatura : ", temp , "ph : " ,ph)
-        return jsonify(temperatura=temp,ph=ph)
+        fecha = datetime.now()
+        print("Paquete recibido en : " , datetime.now(),"temperatura : ", temp , "ph : " ,ph)
+        sql = """INSERT INTO registros_historicos(fecha,ph,temperatura) values(('%s'),('%s'),('%s'))"""%(fecha,ph,temp)
+        cur.execute(sql)
+        conn.commit()
+        return jsonify(temperatura=temp,ph=ph,fecha=fecha)
     elif request.method == 'POST':
         return jsonify(temperatura=temp,ph=ph)
     else:

@@ -101,15 +101,13 @@ function ajaxs() {
 // Data generated from http://www.bikeforums.net/professional-cycling-fans/1113087-2017-tour-de-france-gpx-tcx-files.html
 Highcharts.setOptions({
     global: {
-        useUTC: false
+        useUTC: true
     }
 });
-var elevationData = [
-  [0,10],
-  [0.1,15],
-  [0.3,17]
-];
 
+var datos_phjs = {{datos_ph}};
+var datos_temperaturajs = {{datos_temperatura}};
+console.log( new Date(datos_phjs[0][0]))
 var chart1 = new
 Highcharts.setOptions({
     global: {
@@ -123,7 +121,7 @@ var chart1;
 
 Highcharts.setOptions({
     global: {
-        useUTC: true
+        useUTC: false
     }
 });
 
@@ -133,13 +131,16 @@ Highcharts.stockChart('chart1', {
         type: "spline",
         events: {
             load: function () {
-
+                var aux;
                 // set up the updating of the chart each second
                 var series = this.series[0];
                 setInterval(function () {
                     var x = (new Date()).getTime(), // current time
                         y = parseFloat(temperatura);
-                    series.addPoint([x, y], true, false);
+                    if(temperatura!= aux){
+                      series.addPoint([x, y], true, false);
+                    }
+                    aux = temperatura;
                 }, 1000);
             }
         }
@@ -147,9 +148,9 @@ Highcharts.stockChart('chart1', {
 
     rangeSelector: {
         buttons: [{
-            count: 1,
+            count: 60,
             type: 'minute',
-            text: '1M'
+            text: '1H'
         }, {
             count: 5,
             type: 'minute',
@@ -157,9 +158,14 @@ Highcharts.stockChart('chart1', {
         }, {
             type: 'all',
             text: 'All'
+        },{
+            count: 10,
+            type: 'minute',
+            text: '10M'
         }],
         inputEnabled: true,
-        selected: 'all'
+        selected: 'all',
+        verticalAling: 'bottom'
     },
 
     xAxis: {
@@ -184,7 +190,7 @@ Highcharts.stockChart('chart1', {
             var s = '<b>' + Highcharts.dateFormat('%A, %b %e, %Y', this.x) + '</b>';
 
             $.each(this.points, function () {
-                s += '<br/>temperatura = ' + this.y + '°C';
+                s += '<br/>Temperatura = ' + this.y +" °C";
             });
             return s;
         }
@@ -199,7 +205,7 @@ Highcharts.stockChart('chart1', {
     },
     series: [{
         name: 'Random data',
-        data:[]
+        data:datos_temperaturajs
     }]
 });
 
@@ -214,13 +220,16 @@ Highcharts.stockChart('chart2', {
         type: "spline",
         events: {
             load: function () {
-
+                var aux2;
                 // set up the updating of the chart each second
                 var series = this.series[0];
                 setInterval(function () {
                     var x = (new Date()).getTime(), // current time
-                        y = parseFloat(temperatura);
-                    series.addPoint([x, y], true, false);
+                        y = parseFloat(ph);
+                    if(ph!= aux2){
+                      series.addPoint([x, y], true, false);
+                    }
+                    aux2 = ph;
                 }, 1000);
             }
         }
@@ -228,9 +237,9 @@ Highcharts.stockChart('chart2', {
 
     rangeSelector: {
         buttons: [{
-            count: 1,
+            count: 60,
             type: 'minute',
-            text: '1M'
+            text: '1H'
         }, {
             count: 5,
             type: 'minute',
@@ -238,9 +247,14 @@ Highcharts.stockChart('chart2', {
         }, {
             type: 'all',
             text: 'All'
+        },{
+            count: 10,
+            type: 'minute',
+            text: '10M'
         }],
         inputEnabled: true,
-        selected: 'all'
+        selected: 'all',
+        verticalAling: 'bottom'
     },
 
     xAxis: {
@@ -280,7 +294,7 @@ Highcharts.stockChart('chart2', {
     },
     series: [{
         name: 'Random data',
-        data:[]
+        data:datos_phjs
     }]
 });
 </script>

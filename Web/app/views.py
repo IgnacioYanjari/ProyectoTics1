@@ -9,7 +9,7 @@ cur = conn.cursor()
 @app.route('/')
 @app.route('/index',methods=['POST','GET'])
 def index():
-    sql="""SELECT nombre,id,largo,ancho,alto FROM peceras;"""
+    sql="""SELECT nombre,id,galones, litros FROM peceras;"""
     cur.execute(sql)
     listas = cur.fetchall()
     if request.method == 'POST':

@@ -9,13 +9,27 @@ cur = conn.cursor()
 @app.route('/')
 @app.route('/index',methods=['POST','GET'])
 def index():
-    sql="""SELECT nombre,id,largo,ancho,alto FROM peceras;"""
+    sql="""SELECT nombre,id,galones, litros FROM peceras;"""
     cur.execute(sql)
     listas = cur.fetchall()
     if request.method == 'POST':
         nombre_pecera = request.form['nombre_pecera']
-        galones_pecera = request.form['galones']
-        litros_pecera = request.form['litros']
+        #galones_pecera = request.form['galones']
+        #litros_pecera = request.form['litros']
+	
+	capacidad = request.form['capacidad']
+        opcion_capacidad = request.form['opcion_capacidad']
+	galones_pecera = 0
+        litros_pececra = 0
+        
+	if opcion_capacidad == "Litros":
+            galones_pecera = float(capacidad) / 3.78541
+            litros_pecera = float(capacidad)
+        else:
+            litros_pecera = float(capacidad) * 3.78541
+            galones_pecera = float(capacidad)
+	
+	
         exito = 0
         sql = """SELECT nombre FROM peceras WHERE nombre='%s'; """%(nombre_pecera)
         cur.execute(sql)

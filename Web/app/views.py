@@ -97,7 +97,7 @@ def peces(id_pecera):
 
         if len(danger) == 0:
             danger = -1
-
+            sql =""" ;"""
         elif len(danger) == 1:
             danger=1
 

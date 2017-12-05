@@ -210,8 +210,6 @@ void loop() {
           client.print(Tc);
           client.print("&ph=");
           client.print(pHValue);
-          client.print("&ec=");
-          client.print(ECcurrent);
           client.print(" HTTP/1.1");
           // Serial.print(ECcurrent,2);  //two decimal
           // Serial.println("ms/cm");
@@ -222,8 +220,6 @@ void loop() {
           client.print(Tc);
           client.print("&ph=");
           client.print(pHValue);
-          client.print("&ec=");
-          client.print(ECcurrent2);
           client.print(" HTTP/1.1");
           //client.print("GET /?temperatura=%s&ph=%s&ec=%s HTTP/1.1"), Tc , pHvalue , ECcurrent2 );
 

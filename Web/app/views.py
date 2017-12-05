@@ -49,10 +49,10 @@ def index():
 
 @app.route('/pecera/<id_pecera>',methods=['POST','GET'])
 def pecera(id_pecera):
-    sql = """SELECT fecha , temperatura FROM registros_historicos """
+    sql = """SELECT fecha , temperatura FROM registros_historicos;"""
     cur.execute(sql)
     datos_temperatura=cur.fetchall()
-    sql = """SELECT fecha , temperatura FROM registros_historicos """
+    sql = """SELECT fecha , temperatura FROM registros_historicos;"""
     cur.execute(sql)
     datos_ph = cur.fetchall()
     aux = []
@@ -72,36 +72,49 @@ def pecera(id_pecera):
 
 @app.route('/peces/<id_pecera>',methods=['POST','GET'])
 def peces(id_pecera):
-	#lista_peces=[["id1","tipo_pez1","nombre_pez1"],["id2","tipo_pez2","nombre_pez2"]]
-	sql = """select peces.id,tipos_aceptados.nombre_tipo,peces.nombre_pez from peces,tipos_aceptados where tipos_aceptados.tipo_pez = peces.tipo_pez;"""
-	cur.execute(sql)
-	lista_peces = cur.fetchall()
-	sql = """ SELECT tipo_agua FROM tipos_aceptados GROUP BY tipo_agua;"""
-	cur.execute(sql)
-	tipo_agua = cur.fetchall()
-	sql="""SELECT nombre_tipo,tipo_agua FROM tipos_aceptados """
-	cur.execute(sql)
-	nombres_aceptados = cur.fetchall()
-	danger=2
-	if request.method == 'POST':
-		nombre_send = request.form['nombre_pez']
-		tipoagua_send = request.form['tipo_agua']
-		tipopez_send = request.form['tipo_pez']
-		print("tipo agua : ", tipoagua_send,"tipo pez :",tipopez_send)
-		sql=""" SELECT tipo_pez FROM tipos_aceptados WHERE
-		tipo_agua = '%s' and nombre_tipo ='%s' and pecera_id = '%s';"""%(tipoagua_send , tipopez_send , id_pecera)
-		print(sql)
-		cur.execute(sql)
-		danger = cur.fetchall()
-		print(danger)
-		if len(danger) == 0:
-			danger = -1
-		elif len(danger) == 1:
-			danger = 1
-		else:
-			danger=2
-		return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)
-	return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)
+#lista_peces=[["id1","tipo_pez1","nombre_pez1"],["id2","tipo_pez2","nombre_pez2"]]
+    sql = """select peces.id,tipos_aceptados.nombre_tipo,peces.nombre_pez from peces,tipos_aceptados where  tipos_aceptados.tipo_pez = peces.tipo_pez;"""
+    cur.execute(sql)
+    lista_peces = cur.fetchall()
+    sql = """ SELECT tipo_agua FROM tipos_aceptados GROUP BY tipo_agua;"""
+    cur.execute(sql)
+    tipo_agua = cur.fetchall()
+    sql="""SELECT nombre_tipo,tipo_agua FROM tipos_aceptados;"""
+    cur.execute(sql)
+    nombres_aceptados = cur.fetchall()
+    danger=2
+    if request.method == 'POST':
+
+        nombre_send = request.form['nombre_pez']
+        tipoagua_send = request.form['tipo_agua']
+        tipopez_send = request.form['tipo_pez']
+        print("tipo agua : ", tipoagua_send,"tipo pez :",tipopez_send)
+        sql=""" SELECT tipo_pez FROM tipos_aceptados WHERE tipo_agua = '%s' and nombre_tipo ='%s';"""%(tipoagua_send , tipopez_send)
+        print(sql)
+        cur.execute(sql)
+        danger = cur.fetchall()
+        print(danger)
+
+        if len(danger) == 0:
+            danger = -1
+
+        elif len(danger) == 1:
+            danger=1
+
+        else:
+            danger=2
+
+        return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)
+
+    return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)
+
+
+@app.route('/delete/<id>',methods=['GET','POST'])
+def delete(id):
+    sql = """delete from peces where id ='%s' ;"""%(id)
+    cur.execute(sql)
+    conn.commit()
+    return redirect(request.referrer)
 
 
 

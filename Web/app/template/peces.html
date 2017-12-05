@@ -134,6 +134,7 @@
               <th class="text-center"> Número </th>
               <th class="text-center"> Tipo de Pez </th>
               <th class="text-center"> Nombre </th>
+              <th class="text-center"> Eliminar</th>
             </tr>
           </thead>
           <tbody>
@@ -143,6 +144,9 @@
               <td class="text-center">{{elem[0]}}</td>
               <td class="text-center">{{elem[1]}}</td>
               <td class="text-center">{{elem[2]}}</td>
+              <td class="text-center">
+                <a href="/delete/{{elem[0]}}" class="glyphicon glyphicon-remove" style="text-decoration: none;" role="button"></a>
+              </td>
             </tr>
           {% endfor %}
 

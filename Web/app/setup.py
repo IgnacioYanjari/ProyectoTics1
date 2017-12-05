@@ -3,14 +3,13 @@ import psycopg2
 conn = psycopg2.connect("dbname=%s host=%s user=%s password=%s"%(database,host,user,password))
 cur = conn.cursor()
 
-sql ="""DROP TABLE peceras;
-        DROP TABLE peces;
-        DROP TABLE rangos_peces;
-        DROP TABLE registros_historicos;
-        DROP TABLE tipos_aceptados;
-"""
-
-cur.execute(sql)
+#sql ="""DROP TABLE peceras;
+#        DROP TABLE peces;
+#        DROP TABLE rangos_peces;
+#        DROP TABLE registros_historicos;
+#        DROP TABLE tipos_aceptados;
+#"""
+#cur.execute(sql)
 
 sql = """
 CREATE TABLE peces(id serial primary key , tipo_pez integer , nombre_pez varchar, pecera_id int);

@@ -85,10 +85,9 @@ def peces(id_pecera):
     danger=2
     if request.method == 'POST':
         nombre_send = request.form['nombre_pez']
-        tipoagua_send = request.form['tipo_agua']
         tipopez_send = request.form['tipo_pez']
-        print("tipo agua : ", tipoagua_send,"tipo pez :",tipopez_send)
-        sql=""" SELECT tipo_pez FROM tipos_aceptados WHERE tipo_agua = '%s' and nombre_tipo ='%s';"""%(tipoagua_send , tipopez_send)
+        print("tipo pez :",tipopez_send)
+        sql=""" SELECT tipo_pez FROM tipos_aceptados WHERE nombre_tipo ='%s';"""%(tipopez_send)
         print(sql)
         cur.execute(sql)
         danger = cur.fetchall()
@@ -104,7 +103,6 @@ def peces(id_pecera):
             sql = """select peces.id,tipos_aceptados.nombre_tipo,peces.nombre_pez from peces,tipos_aceptados where  tipos_aceptados.tipo_pez = peces.tipo_pez;"""
             cur.execute(sql)
             lista_peces = cur.fetchall()
-
         else:
             danger=2
         return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)

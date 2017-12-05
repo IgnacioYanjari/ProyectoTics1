@@ -64,32 +64,22 @@
         <i class="fa fa-edit"></i> Agregar Peces
     </div>
     <div class="panel-body" >
-      <form  action="pecera" method="post">
+      <form  action="1" method="post">
 
         <div class="row">
-          <div class="col-lg-4 col-md-4">
-            <div class="form-group text-center">
-              <label for="sel1">Tipo de agua:</label>
-              <select class="form-control" id="sel1" name="tipo_agua">
-                {% for tipo in tipo_agua2 %}
-                    <option value="{{tipo[0]}}">{{tipo[0]}}</option>
-                {% endfor %}
-              </select>
-            </div>
-          </div>
 
-          <div class="col-lg-4 col-md-4">
+          <div class="col-lg-6 col-md-4">
             <div class="form-group text-center">
               <label for="sel2">Tipo de pez:</label>
               <select class="form-control" id="sel2" name="tipo_pez" >
                 {% for nombre in nombres_aceptados %}
-                <option value="{{nombre[0]}}">{{nombre[0]}}</option>
+                <option value="{{nombre[0]}}">{{nombre[0]}} ({{nombre[1]}})  </option>
                 {% endfor%}
               </select>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-4">
+          <div class="col-lg-6 col-md-4">
             <div class="form-group text-center">
               <label for="msg">Nombre Pez:</label>
               <input id="msg" type="text" class="form-control" name="nombre_pez" placeholder="Nombre Pez">

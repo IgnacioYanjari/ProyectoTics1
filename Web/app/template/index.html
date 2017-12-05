@@ -14,7 +14,7 @@
     <div class="panel-heading text-center">
       Lista de Peceras ingresadas :
     </div>
-    <div class="panel-body center-block">
+    <div class="panel-body center-block" style="overflow-y: scroll; height:10cm;">
       <table class="table table-hover">
         <thead>
           <tr>
@@ -44,7 +44,9 @@
             <td class="text-center">{{elem[0]}}</td>
             <td class="text-center">{{elem[2]}}</td>
             <td class="text-center">{{elem[3]}}</td>
-
+            <td class="text-center">
+              <a href="#" class="glyphicon glyphicon-ban-circle" style="text-decoration: none;" role="button"></a>
+            </td>
           </tr>
           {% endif %}
         {% endfor %}

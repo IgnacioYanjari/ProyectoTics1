@@ -84,7 +84,6 @@ def peces(id_pecera):
     nombres_aceptados = cur.fetchall()
     danger=2
     if request.method == 'POST':
-
         nombre_send = request.form['nombre_pez']
         tipoagua_send = request.form['tipo_agua']
         tipopez_send = request.form['tipo_pez']
@@ -97,13 +96,17 @@ def peces(id_pecera):
 
         if len(danger) == 0:
             danger = -1
-            sql =""" ;"""
         elif len(danger) == 1:
             danger=1
+            sql="""insert into peces(tipo_pez,nombre_pez,pecera_id) values('%s','%s','1');"""%(danger,nombre_send)
+            cur.execute(sql)
+            conn.commit()
+            sql = """select peces.id,tipos_aceptados.nombre_tipo,peces.nombre_pez from peces,tipos_aceptados where  tipos_aceptados.tipo_pez = peces.tipo_pez;"""
+            cur.execute(sql)
+            lista_peces = cur.fetchall()
 
         else:
             danger=2
-
         return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)
 
     return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)

@@ -125,24 +125,32 @@
         <i class="fa fa-edit"></i> Tabla de peces ingresados
     </div>
     <div class="panel-body" style="overflow-y: scroll; height:10cm;">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th class="text-center"> Número </th>
-            <th class="text-center"> Tipo de Pez </th>
-            <th class="text-center"> Nombre </th>
-          </tr>
-        </thead>
-        <tbody>
-        {% for elem in peces %}
-          <tr>
-            <td class="text-center">{{elem[0]}}</td>
-            <td class="text-center">{{elem[1]}}</td>
-            <td class="text-center">{{elem[2]}}</td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
+      {% if peces|length == 0 %}
+        <h1 class="text-center"> No se han insertado peces </h1>
+      {% else %}
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="text-center"> Número </th>
+              <th class="text-center"> Tipo de Pez </th>
+              <th class="text-center"> Nombre </th>
+            </tr>
+          </thead>
+          <tbody>
+
+          {% for elem in peces %}
+            <tr>
+              <td class="text-center">{{elem[0]}}</td>
+              <td class="text-center">{{elem[1]}}</td>
+              <td class="text-center">{{elem[2]}}</td>
+            </tr>
+          {% endfor %}
+
+          </tbody>
+        </table>
+
+      {% endif%}
+
     </div>
   </div>
 </div>

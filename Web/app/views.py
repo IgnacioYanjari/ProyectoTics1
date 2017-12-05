@@ -72,10 +72,10 @@ def pecera(id_pecera):
 
 @app.route('/peces/<id_pecera>',methods=['POST','GET'])
 def peces(id_pecera):
-	lista_peces=[["id1","tipo_pez1","nombre_pez1"],["id2","tipo_pez2","nombre_pez2"]]
-	#sql = """select id,tipo_pez,nombre_pez from peces;"""
-	#cur.execute(sql)
-	#lista_peces = cur.fetchall()
+	#lista_peces=[["id1","tipo_pez1","nombre_pez1"],["id2","tipo_pez2","nombre_pez2"]]
+	sql = """select peces.id,tipos_aceptados.nombre_tipo,peces.nombre_pez from peces,tipos_aceptados where tipos_aceptados.tipo_pez = peces.tipo_pez;"""
+	cur.execute(sql)
+	lista_peces = cur.fetchall()
 	sql = """ SELECT tipo_agua FROM tipos_aceptados GROUP BY tipo_agua;"""
 	cur.execute(sql)
 	tipo_agua = cur.fetchall()

@@ -11,4 +11,4 @@
 ## Información Adicional:
 
   1. [Sobre plataforma web](https://github.com/IgnacioYanjari/ProyectoTics1/tree/master/Web)
-  2. [Avances de informes](https://github.com/IgnacioYanjari/ProyectoTics1/tree/master/Avance)
+  2. [Avances de informes](https://github.com/IgnacioYanjari/ProyectoTics1/tree/master/Avances)

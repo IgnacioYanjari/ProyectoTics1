@@ -21,8 +21,8 @@ cur.execute(sql)
 conn.commit()
 
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('1','Esturión','Tropical')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
+('1','Esturión','Tropical','17')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -40,8 +40,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('2','Cardenal','Tropical')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
+('2','Cardenal','Tropical','22')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -60,8 +60,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('3','Monjita','Tropical')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
+('3','Monjita','Tropical','10')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -79,8 +79,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('4','Tetra de cabeza roja','Tropical')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
+('4','Tetra de cabeza roja','Tropical','29')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -98,8 +98,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('5','Barbo Tetrazona','Tropical')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
+('5','Barbo Tetrazona','Tropical', '5')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -117,8 +117,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('6','Danio Cebra','Tropical')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
+('6','Danio Cebra','Tropical','10')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -137,8 +137,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('7','Botia Payaso','Tropical')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
+('7','Botia Payaso','Tropical', '3')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -156,8 +156,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('8','Xipho','Tropical')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
+('8','Xipho','Tropical', '14')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -175,8 +175,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('9','Scalare','Tropical')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
+('9','Scalare','Tropical', '13')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -194,8 +194,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('10','Pangasius','Tropical')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
+('10','Pangasius','Tropical','24')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -213,8 +213,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('11','Disco Azul Royal Blue','Tropical')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
+('11','Disco Azul Royal Blue','Tropical', '10')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -232,8 +232,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('12','Plecostomus Punteado','Tropical')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
+('12','Plecostomus Punteado','Tropical','22')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -250,8 +250,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('13','Piraña roja','Tropical')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
+('13','Piraña roja','Tropical','14')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -273,8 +273,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('14','Shubunkin','Agua fria')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
+('14','Shubunkin','Agua fria','32')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -292,8 +292,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('15','Carpa común','Agua fria')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
+('15','Carpa común','Agua fria','23')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -310,8 +310,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('16','Telescopio','Agua fria')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
+('16','Telescopio','Agua fria','41')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -328,8 +328,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('17','Burbuja','Agua fria')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
+('17','Burbuja','Agua fria','23')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -346,8 +346,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('18','Cabeza de León','Agua fria')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
+('18','Cabeza de León','Agua fria','21')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -364,8 +364,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('19','Cabeza de León holandés','Agua fria')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
+('19','Cabeza de León holandés','Agua fria','19')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -382,8 +382,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('20','Calico Fantail','Agua fria')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
+('20','Calico Fantail','Agua fria','12')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -400,8 +400,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('21','Carpa','Agua fria')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
+('21','Carpa','Agua fria','21')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -418,8 +418,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('22','Celestial','Agua fria')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
+('22','Celestial','Agua fria','24')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -436,8 +436,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('23','Fantail','Agua fria')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
+('23','Fantail','Agua fria','32')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -455,8 +455,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('24','Goldfish','Agua fria')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
+('24','Goldfish','Agua fria','32')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -473,8 +473,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('25','Jikin','Agua fria')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
+('25','Jikin','Agua fria','42')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -491,8 +491,8 @@ tipo_pez, ph_max, ph_min , temperatura_max ,temperatura_min;
 cur.execute(sql)
 conn.commit()
 sql="""
-insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua) values
-('26','Shubunkin London','Agua fria')
+insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
+('26','Shubunkin London','Agua fria','11')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """

@@ -1,7 +1,14 @@
 # ProyectoTics1
-- Tareas Por Hacer
-  1. Modelamiento de la caja (Prototipo)
-  2. Agregar Peces
-  3. Formula de cantidad de peces
-  4. Procesamiento de datos para el conocimiento predictivo de cambios
-  5. Prueba Final
+
+## Tareas Por Hacer
+
+  - Modelamiento de la caja (Prototipo)
+  - Agregar Peces
+  - Formula de cantidad de peces
+  - Procesamiento de datos para el conocimiento predictivo de cambios
+  - Prueba Final
+  
+## Información Adicional:
+
+  - [Sobre plataforma web](https://github.com/IgnacioYanjari/ProyectoTics1/tree/master/Web)
+  - [Avances de informes](https://github.com/IgnacioYanjari/ProyectoTics1/tree/master/Avances)

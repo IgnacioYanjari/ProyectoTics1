@@ -94,7 +94,7 @@ def peces(id_pecera):
         danger = cur.fetchone()
         for i in range(1,10):
             print(danger)
-        if len(danger) == 0:
+        if len(danger) == 0 or nombre_send == "":
             danger = -1
         elif len(danger) == 1:
             sql="""insert into peces(tipo_pez,nombre_pez,pecera_id) values('%s','%s','1');"""%(danger[0],nombre_send)

@@ -1,4 +1,7 @@
 {% extends "plantilla.html"%}
+{% block link %}
+  <a href="/pecera/1"> <i class="fa fa-tasks"></i> Gráficos</a>
+{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-lg-12 ">
@@ -67,7 +70,6 @@
       <form  action="1" method="post">
 
         <div class="row">
-
           <div class="col-lg-6 col-md-4">
             <div class="form-group text-center">
               <label for="sel2">Tipo de pez:</label>
@@ -95,6 +97,7 @@
 
   </div>
 </div>
+
 <div class="row">
   {% if danger == -1 %}
   <div class="alert alert-danger text-center">

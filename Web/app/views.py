@@ -32,6 +32,7 @@ def index():
 
         if nombre == None and len(nombre_pecera) > 0:
             galones_pecera = round(galones_pecera,2)
+            litros_pecera = round(litros_pecera,2)
             sql = """insert into peceras (nombre, galones, litros) values (('%s'), ('%s'), ('%s'));
             """%(nombre_pecera,galones_pecera, litros_pecera)
             cur.execute(sql)
@@ -90,19 +91,19 @@ def peces(id_pecera):
         sql=""" SELECT tipo_pez FROM tipos_aceptados WHERE nombre_tipo ='%s';"""%(tipopez_send)
         print(sql)
         cur.execute(sql)
-        danger = cur.fetchall()
-        print(danger)
-
+        danger = cur.fetchone()
+        for i in range(1,10):
+            print(danger)
         if len(danger) == 0:
             danger = -1
         elif len(danger) == 1:
-            danger=1
-            sql="""insert into peces(tipo_pez,nombre_pez,pecera_id) values('%s','%s','1');"""%(danger,nombre_send)
+            sql="""insert into peces(tipo_pez,nombre_pez,pecera_id) values('%s','%s','1');"""%(danger[0],nombre_send)
             cur.execute(sql)
             conn.commit()
             sql = """select peces.id,tipos_aceptados.nombre_tipo,peces.nombre_pez from peces,tipos_aceptados where  tipos_aceptados.tipo_pez = peces.tipo_pez;"""
             cur.execute(sql)
             lista_peces = cur.fetchall()
+            danger=1
         else:
             danger=2
         return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)

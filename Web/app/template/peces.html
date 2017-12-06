@@ -54,8 +54,8 @@
             url: '/data',
             async: true,
             success: function (data) {
-                $("#data_temp").text(data.temperatura)
-                $('#data_ph').text(data.ph)
+                $("#data_temp").text((data.temperatura*1).toPrecision(4))
+                $('#data_ph').text((data.ph*1).toPrecision(4))
             }
         });
     }

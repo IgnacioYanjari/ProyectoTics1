@@ -56,6 +56,8 @@ def pecera(id_pecera):
     sql = """SELECT fecha , temperatura FROM registros_historicos;"""
     cur.execute(sql)
     datos_ph = cur.fetchall()
+    for i in range(2,100):
+        print("datos_temperatura:\t",datos_temperatura)
     aux = []
     for elem in datos_temperatura:
         aux2 = [int(time.mktime(elem[0].timetuple()) * 1000),elem[1]]

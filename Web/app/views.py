@@ -83,6 +83,9 @@ def peces(id_pecera):
     sql="""SELECT nombre_tipo,tipo_agua FROM tipos_aceptados;"""
     cur.execute(sql)
     nombres_aceptados = cur.fetchall()
+    sql ="""SELECT litros_disponibles FROM peceras WHERE peceras.id='1'"""
+    cur.execute(sql)
+    litros_disponibles = cur.fetchone()
     danger=2
     if request.method == 'POST':
         nombre_send = request.form['nombre_pez']
@@ -143,39 +146,87 @@ def peces(id_pecera):
         cur.execute(sql)
         rango_max2 = cur.fetchone()
 
-        if (rango_min[0]>= max_elem and rango_min[0] <= min_elem) or (rango_max[0]<= min_elem and rango_max[0] >= max_elem) and (rango_min2[0]>= max_elem2 and rango_min2[0] <= min_elem2) or (rango_max2[0]<= min_elem2 and rango_max2[0] >= max_elem2):
-            print("tipo pez :",tipopez_send)
-            sql=""" SELECT tipo_pez FROM tipos_aceptados WHERE nombre_tipo ='%s';"""%(tipopez_send)
-            print(sql)
-            cur.execute(sql)
-            danger = cur.fetchone()
-            for i in range(1,10):
-                print(danger)
-            if len(danger) == 0 or nombre_send == "":
-                danger = -1
-            elif len(danger) == 1:
-                sql="""insert into peces(tipo_pez,nombre_pez,pecera_id) values('%s','%s','1');"""%(danger[0],nombre_send)
-                cur.execute(sql)
-                conn.commit()
-                sql = """select peces.id,tipos_aceptados.nombre_tipo,peces.nombre_pez from peces,tipos_aceptados where  tipos_aceptados.tipo_pez = peces.tipo_pez;"""
-                cur.execute(sql)
-                lista_peces = cur.fetchall()
-                danger=1
-            else:
-                danger=2
-            return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)
-        else:
-            danger=-2
-            return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)
 
-    return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)
+        sql="""SELECT litros, litros_disponibles FROM peceras WHERE peceras.id = '%s';"""%(id_pecera)
+        cur.execute(sql)
+        litros_total = cur.fetchone()
+
+        sql="""SELECT litros_de_pez FROM tipos_aceptados WHERE tipos_aceptados.nombre_tipo = '%s' ;"""%(tipopez_send)
+        cur.execute(sql)
+        litros_pez_ingresado = cur.fetchone()
+####
+        if litros_total[1] >= litros_pez_ingresado[0]:
+            if (rango_min[0]>= max_elem and rango_min[0] <= min_elem) or (rango_max[0]<= min_elem and rango_max[0] >= max_elem) and (rango_min2[0]>= max_elem2 and rango_min2[0] <= min_elem2) or (rango_max2[0]<= min_elem2 and rango_max2[0] >= max_elem2):
+                print("tipo pez :",tipopez_send)
+                sql=""" SELECT tipo_pez FROM tipos_aceptados WHERE nombre_tipo ='%s';"""%(tipopez_send)
+                print(sql)
+                cur.execute(sql)
+                danger = cur.fetchone()
+                for i in range(1,10):
+                    print(danger)
+                if len(danger) == 0 or nombre_send == "":
+                    danger = -1
+                elif len(danger) == 1:
+######
+                    sql="""UPDATE peceras SET litros_disponibles= '%s' WHERE peceras.id = '%s';"""%(litros_total[1]-litros_pez_ingresado[0],id_pecera)
+                    cur.execute(sql)
+                    for i in range(0,20):
+                        print("LITROS TOTAL:", litros_total,"  LITROS DISPONIBLES:", litros_total[1]-litros_pez_ingresado[0])
+######
+                    sql="""insert into peces(tipo_pez,nombre_pez,pecera_id) values('%s','%s','1');"""%(danger[0],nombre_send)
+                    cur.execute(sql)
+                    conn.commit()
+                    sql = """select peces.id,tipos_aceptados.nombre_tipo,peces.nombre_pez from peces,tipos_aceptados where  tipos_aceptados.tipo_pez = peces.tipo_pez;"""
+                    cur.execute(sql)
+                    lista_peces = cur.fetchall()
+                    danger=1
+                else:
+                    danger=2
+
+                sql ="""SELECT litros_disponibles FROM peceras WHERE peceras.id='1'"""
+                cur.execute(sql)
+                litros_disponibles = cur.fetchone()
+                return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces,litros_disponibles=litros_disponibles)
+            else:
+                sql ="""SELECT litros_disponibles FROM peceras WHERE peceras.id='1'"""
+                cur.execute(sql)
+                litros_disponibles = cur.fetchone()
+                danger=-2
+                return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces,litros_disponibles=litros_disponibles)
+    return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces,litros_disponibles=litros_disponibles)
 
 
 @app.route('/delete/<id>',methods=['GET','POST'])
 def delete(id):
+
+    sql ="""SELECT tipo_pez FROM peces WHERE id = '%s' AND pecera_id ='1';"""%(id)
+    cur.execute(sql)
+    tipo_pez = cur.fetchone()
+
     sql = """delete from peces where id ='%s' ;"""%(id)
     cur.execute(sql)
+
+    #for i in range(0,10):
+    #    print(tipo_pez)
+
+######
+    sql="""SELECT litros_de_pez FROM tipos_aceptados WHERE tipos_aceptados.tipo_pez = '%s' ;"""%(tipo_pez[0])
+    cur.execute(sql)
+    litros_de_pez = cur.fetchone()
+
+    #for i in range(0,10):
+    #    print("LITROS DE PEZ:",litros_de_pez)
+
+    sql = """UPDATE peceras SET litros_disponibles= litros_disponibles + '%s' WHERE peceras.id = '1';"""%(litros_de_pez[0])
+    cur.execute(sql)
     conn.commit()
+
+    sql = """SELECT litros_disponibles FROM peceras WHERE peceras.id='1';"""
+    cur.execute(sql)
+    litros_disponibles = cur.fetchone()
+
+    #for i in range(0,10):
+        #print("LITROS DISPONIBLES:",litros_disponibles[0])
     return redirect(request.referrer)
 
 

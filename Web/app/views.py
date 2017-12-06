@@ -87,26 +87,86 @@ def peces(id_pecera):
     if request.method == 'POST':
         nombre_send = request.form['nombre_pez']
         tipopez_send = request.form['tipo_pez']
-        print("tipo pez :",tipopez_send)
-        sql=""" SELECT tipo_pez FROM tipos_aceptados WHERE nombre_tipo ='%s';"""%(tipopez_send)
-        print(sql)
+        
+        ############################################### INGRESAR RANGOS CORRECTOS DE PH ####################################
+        sql="""SELECT rangos_peces.ph_min FROM rangos_peces, peces WHERE peces.tipo_pez=rangos_peces.tipo_pez;"""
         cur.execute(sql)
-        danger = cur.fetchone()
-        for i in range(1,10):
-            print(danger)
-        if len(danger) == 0 or nombre_send == "":
-            danger = -1
-        elif len(danger) == 1:
-            sql="""insert into peces(tipo_pez,nombre_pez,pecera_id) values('%s','%s','1');"""%(danger[0],nombre_send)
+        list_min = cur.fetchall()  #maximo de los minimos ph tenemos que calcular
+
+        max_elem = 0
+
+        for i in list_min:
+            if max_elem < i[0]:
+                max_elem = i[0]
+        sql="""SELECT rangos_peces.ph_max FROM rangos_peces, peces WHERE peces.tipo_pez=rangos_peces.tipo_pez;"""
+        cur.execute(sql)
+        list_max = cur.fetchall() #minimo de los maximos ph tenemos que calcular
+
+        min_elem = 200
+        for i in list_max:
+            if min_elem > i[0]:
+                min_elem = i[0]
+
+        sql="""SELECT rangos_peces.ph_min FROM rangos_peces,tipos_aceptados WHERE tipos_aceptados.nombre_tipo = '%s' and rangos_peces.tipo_pez=tipos_aceptados.tipo_pez;"""%(tipopez_send)
+        cur.execute(sql)
+        rango_min = cur.fetchone()
+
+        sql="""SELECT rangos_peces.ph_max FROM rangos_peces, tipos_aceptados WHERE tipos_aceptados.nombre_tipo = '%s' and rangos_peces.tipo_pez=tipos_aceptados.tipo_pez"""%(tipopez_send)
+        cur.execute(sql)
+        rango_max = cur.fetchone()
+
+############################################### INGRESAR RANGOS CORRECTOS DE TEMPERATURA ####################################
+
+        sql="""SELECT rangos_peces.temperatura_min FROM rangos_peces, peces WHERE peces.tipo_pez=rangos_peces.tipo_pez;"""
+        cur.execute(sql)
+        list_min2 = cur.fetchall()  #maximo de los minimos ph tenemos que calcular
+
+        max_elem2 = 0
+
+        for i in list_min2:
+            if max_elem2 < i[0]:
+                max_elem2 = i[0]
+        sql="""SELECT rangos_peces.temperatura_max FROM rangos_peces, peces WHERE peces.tipo_pez=rangos_peces.tipo_pez;"""
+        cur.execute(sql)
+        list_max2 = cur.fetchall() #minimo de los maximos ph tenemos que calcular
+
+        min_elem2 = 200
+        for i in list_max2:
+            if min_elem2 > i[0]:
+                min_elem2 = i[0]
+
+        sql="""SELECT rangos_peces.temperatura_min FROM rangos_peces,tipos_aceptados WHERE tipos_aceptados.nombre_tipo = '%s' and rangos_peces.tipo_pez=tipos_aceptados.tipo_pez;"""%(tipopez_send)
+        cur.execute(sql)
+        rango_min2 = cur.fetchone()
+
+        sql="""SELECT rangos_peces.temperatura_max FROM rangos_peces, tipos_aceptados WHERE tipos_aceptados.nombre_tipo = '%s' and rangos_peces.tipo_pez=tipos_aceptados.tipo_pez"""%(tipopez_send)
+        cur.execute(sql)
+        rango_max2 = cur.fetchone()
+        
+        if (rango_min[0]>= max_elem and rango_min[0] <= min_elem) or (rango_max[0]<= min_elem and rango_max[0] >= max_elem) and (rango_min2[0]>= max_elem2 and rango_min2[0] <= min_elem2) or (rango_max2[0]<= min_elem2 and rango_max2[0] >= max_elem2):
+            print("tipo pez :",tipopez_send)
+            sql=""" SELECT tipo_pez FROM tipos_aceptados WHERE nombre_tipo ='%s';"""%(tipopez_send)
+            print(sql)
             cur.execute(sql)
-            conn.commit()
-            sql = """select peces.id,tipos_aceptados.nombre_tipo,peces.nombre_pez from peces,tipos_aceptados where  tipos_aceptados.tipo_pez = peces.tipo_pez;"""
-            cur.execute(sql)
-            lista_peces = cur.fetchall()
-            danger=1
+            danger = cur.fetchone()
+            for i in range(1,10):
+                print(danger)    
+            if len(danger) == 0 or nombre_send == "":
+                danger = -1
+            elif len(danger) == 1:
+                sql="""insert into peces(tipo_pez,nombre_pez,pecera_id) values('%s','%s','1');"""%(danger[0],nombre_send)
+                cur.execute(sql)
+                conn.commit()
+                sql = """select peces.id,tipos_aceptados.nombre_tipo,peces.nombre_pez from peces,tipos_aceptados where  tipos_aceptados.tipo_pez = peces.tipo_pez;"""
+                cur.execute(sql)
+                lista_peces = cur.fetchall()
+                danger=1
+            else:
+                danger=2
+            return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)
         else:
-            danger=2
-        return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)
+            danger=-1
+            return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)
 
     return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)
 

@@ -87,7 +87,7 @@ def peces(id_pecera):
     if request.method == 'POST':
         nombre_send = request.form['nombre_pez']
         tipopez_send = request.form['tipo_pez']
-        
+
         ############################################### INGRESAR RANGOS CORRECTOS DE PH ####################################
         sql="""SELECT rangos_peces.ph_min FROM rangos_peces, peces WHERE peces.tipo_pez=rangos_peces.tipo_pez;"""
         cur.execute(sql)
@@ -142,7 +142,7 @@ def peces(id_pecera):
         sql="""SELECT rangos_peces.temperatura_max FROM rangos_peces, tipos_aceptados WHERE tipos_aceptados.nombre_tipo = '%s' and rangos_peces.tipo_pez=tipos_aceptados.tipo_pez"""%(tipopez_send)
         cur.execute(sql)
         rango_max2 = cur.fetchone()
-        
+
         if (rango_min[0]>= max_elem and rango_min[0] <= min_elem) or (rango_max[0]<= min_elem and rango_max[0] >= max_elem) and (rango_min2[0]>= max_elem2 and rango_min2[0] <= min_elem2) or (rango_max2[0]<= min_elem2 and rango_max2[0] >= max_elem2):
             print("tipo pez :",tipopez_send)
             sql=""" SELECT tipo_pez FROM tipos_aceptados WHERE nombre_tipo ='%s';"""%(tipopez_send)
@@ -150,7 +150,7 @@ def peces(id_pecera):
             cur.execute(sql)
             danger = cur.fetchone()
             for i in range(1,10):
-                print(danger)    
+                print(danger)
             if len(danger) == 0 or nombre_send == "":
                 danger = -1
             elif len(danger) == 1:
@@ -165,7 +165,7 @@ def peces(id_pecera):
                 danger=2
             return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)
         else:
-            danger=-1
+            danger=-2
             return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)
 
     return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces)

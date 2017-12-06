@@ -25,7 +25,7 @@
             Ph
           </div>
           <div class="panel-body">
-            <p id="data_temp">...</p>
+            <h2 id="data_temp">...</h2>
           </div>
         </div>
       </div>
@@ -35,7 +35,7 @@
             Temperatura  (°C)
           </div>
           <div class="panel-body">
-            <p id="data_ph">...</p>
+            <h2 id="data_ph">...</h2>
           </div>
         </div>
       </div>
@@ -106,6 +106,14 @@
   {% elif danger == 1  %}
   <div class="alert alert-success text-center">
     <strong>Pez agregado correctamente</strong>
+  </div>
+  {% elif danger == -2%}
+  <div class="alert alert-danger text-center">
+    <strong>Estos peces no pueden estar juntos </strong>
+    <br>
+    <strong> Y/O </strong>
+    <br>
+    <strong> No se puede ingresar debido a que no puede vivir dado la cantidad de litros disponibles en la pecera</strong>
   </div>
   {% endif %}
 

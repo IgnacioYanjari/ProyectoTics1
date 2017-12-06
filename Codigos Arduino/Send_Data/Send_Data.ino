@@ -43,7 +43,7 @@ int pHArrayIndex=0;
 const byte numReadings = 20;     //the number of sample times
 byte ECsensorPin = A1;  //EC Meter analog output,pin on analog 1
 byte DS18B20_Pin = 2; //DS18B20 signal, pin on digital 2
-unsigned int AnalogSampleInterval=25,printIntervalec=500,tempSampleInterval=650;  //analog sample interval;serial print interval;temperature sample interval
+unsigned int AnalogSampleInterval=25,printIntervalec=500,tempSampleInterval=1000;  //analog sample interval;serial print interval;temperature sample interval
 unsigned int readings[numReadings];      // the readings from the analog input
 byte index = 0;                  // the index of the current reading
 unsigned long AnalogValueTotal = 0;                  // the running total
@@ -63,10 +63,10 @@ byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 // if you don't want to use DNS (and reduce your sketch size)
 // use the numeric IP instead of the name for the server:
 //IPAddress server(74,125,232,128);  // numeric IP for Google (no DNS)
-char server[] = "10.10.1.147";    // name address for Google (using DNS)
+char server[] = "192.168.1.147";    // name address for Google (using DNS)
 
 // Set the static IP address to use if the DHCP fails to assign
-IPAddress ip(10,10,1,148);
+IPAddress ip(192,168,1,237);
 
 // Initialize the Ethernet client library
 // with the IP address and port of the server
@@ -256,7 +256,7 @@ void loop() {
   if(client.connected()){
     client.stop(); //Disconnect from the server
   }
-
+  delay(1000);
 }
 
 

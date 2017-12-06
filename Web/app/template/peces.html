@@ -1,4 +1,7 @@
 {% extends "plantilla.html"%}
+{% block link %}
+  <a href="/pecera/1"> <i class="fa fa-tasks"></i> Gráficos</a>
+{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-lg-12 ">
@@ -22,7 +25,7 @@
             Ph
           </div>
           <div class="panel-body">
-            <p id="data_temp">...</p>
+            <h2 id="data_temp">...</h2>
           </div>
         </div>
       </div>
@@ -32,7 +35,7 @@
             Temperatura  (°C)
           </div>
           <div class="panel-body">
-            <p id="data_ph">...</p>
+            <h2 id="data_ph">...</h2>
           </div>
         </div>
       </div>
@@ -67,7 +70,6 @@
       <form  action="1" method="post">
 
         <div class="row">
-
           <div class="col-lg-6 col-md-4">
             <div class="form-group text-center">
               <label for="sel2">Tipo de pez:</label>
@@ -95,6 +97,7 @@
 
   </div>
 </div>
+
 <div class="row">
   {% if danger == -1 %}
   <div class="alert alert-danger text-center">
@@ -103,6 +106,14 @@
   {% elif danger == 1  %}
   <div class="alert alert-success text-center">
     <strong>Pez agregado correctamente</strong>
+  </div>
+  {% elif danger == -2%}
+  <div class="alert alert-danger text-center">
+    <strong>Estos peces no pueden estar juntos </strong>
+    <br>
+    <strong> Y/O </strong>
+    <br>
+    <strong> No se puede ingresar debido a que no puede vivir dado la cantidad de litros disponibles en la pecera</strong>
   </div>
   {% endif %}
 

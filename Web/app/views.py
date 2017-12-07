@@ -184,8 +184,8 @@ def peces(id_pecera):
                     sql = """select peces.id,tipos_aceptados.nombre_tipo,peces.nombre_pez from peces,tipos_aceptados where  tipos_aceptados.tipo_pez = peces.tipo_pez;"""
                     cur.execute(sql)
                     lista_peces = cur.fetchall()
-                    
                     danger=1
+                    return redirect(request.referrer)
                 else:
                     danger=2
                 sql ="""SELECT litros_disponibles FROM peceras WHERE peceras.id='1'"""

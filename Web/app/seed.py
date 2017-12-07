@@ -22,7 +22,7 @@ conn.commit()
 
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
-('1','Esturión','Tropical','17')
+('1','Esturión','Tropical','500')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -41,7 +41,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
-('2','Cardenal','Tropical','22')
+('2','Cardenal','Tropical','3')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -61,7 +61,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
-('3','Monjita','Tropical','10')
+('3','Monjita','Tropical','6')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -80,7 +80,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
-('4','Tetra de cabeza roja','Tropical','29')
+('4','Tetra de cabeza roja','Tropical','4')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -99,7 +99,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
-('5','Barbo Tetrazona','Tropical', '5')
+('5','Barbo Tetrazona','Tropical', '7.5')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -118,7 +118,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
-('6','Danio Cebra','Tropical','10')
+('6','Danio Cebra','Tropical','6')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -138,7 +138,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
-('7','Botia Payaso','Tropical', '3')
+('7','Botia Payaso','Tropical', '30')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -157,7 +157,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
-('8','Xipho','Tropical', '14')
+('8','Xipho','Tropical', '30')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -176,7 +176,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
-('9','Scalare','Tropical', '13')
+('9','Scalare','Tropical', '15')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -195,7 +195,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
-('10','Pangasius','Tropical','24')
+('10','Pangasius','Tropical','150')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -233,7 +233,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
-('12','Plecostomus Punteado','Tropical','22')
+('12','Plecostomus Punteado','Tropical','50')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -251,7 +251,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
-('13','Piraña roja','Tropical','14')
+('13','Piraña roja','Tropical','30')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -274,7 +274,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
-('14','Shubunkin','Agua fria','32')
+('14','Shubunkin','Agua fria','15')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -293,7 +293,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
-('15','Carpa común','Agua fria','23')
+('15','Carpa común','Agua fria','50')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -311,7 +311,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
-('16','Telescopio','Agua fria','41')
+('16','Telescopio','Agua fria','8')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -329,7 +329,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
-('17','Burbuja','Agua fria','23')
+('17','Burbuja','Agua fria','13')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -365,7 +365,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
-('19','Cabeza de León holandés','Agua fria','19')
+('19','Cabeza de León holandés','Agua fria','20')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -383,7 +383,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua, litros_de_pez) values
-('20','Calico Fantail','Agua fria','12')
+('20','Calico Fantail','Agua fria','15')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -401,7 +401,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
-('21','Carpa','Agua fria','21')
+('21','Carpa','Agua fria','120')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -419,7 +419,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
-('22','Celestial','Agua fria','24')
+('22','Celestial','Agua fria','13')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -437,7 +437,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
-('23','Fantail','Agua fria','32')
+('23','Fantail','Agua fria','15')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -456,7 +456,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
-('24','Goldfish','Agua fria','32')
+('24','Goldfish','Agua fria','20')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -474,7 +474,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
-('25','Jikin','Agua fria','42')
+('25','Jikin','Agua fria','12')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -492,7 +492,7 @@ cur.execute(sql)
 conn.commit()
 sql="""
 insert into tipos_aceptados (tipo_pez , nombre_tipo , tipo_agua,litros_de_pez) values
-('26','Shubunkin London','Agua fria','11')
+('26','Shubunkin London','Agua fria','12')
 returning
 tipo_pez , nombre_tipo , tipo_agua;
 """
@@ -502,7 +502,7 @@ conn.commit()
 #Iniciamos la pecera
 sql="""
 insert into peceras(id,nombre,galones,litros,litros_disponibles) values
-('1','Pecera1','100','100 ','100')
+('1','Pecera1','2.49','9.45','9.45')
 """
 cur.execute(sql)
 conn.commit()

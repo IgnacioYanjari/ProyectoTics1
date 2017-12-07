@@ -89,28 +89,48 @@ def peces(id_pecera):
     cur.execute(sql)
     litros_disponibles = cur.fetchone()
     danger=2
+    ############################################### INGRESAR RANGOS CORRECTOS DE PH ####################################
+    sql="""SELECT rangos_peces.ph_min FROM rangos_peces, peces WHERE peces.tipo_pez=rangos_peces.tipo_pez;"""
+    cur.execute(sql)
+    list_min = cur.fetchall()  #maximo de los minimos ph tenemos que calcular
+
+    max_elem = 0
+
+    for i in list_min:
+        if max_elem < i[0]:
+            max_elem = i[0]
+    sql="""SELECT rangos_peces.ph_max FROM rangos_peces, peces WHERE peces.tipo_pez=rangos_peces.tipo_pez;"""
+    cur.execute(sql)
+    list_max = cur.fetchall() #minimo de los maximos ph tenemos que calcular
+
+    min_elem = 200
+    for i in list_max:
+        if min_elem > i[0]:
+            min_elem = i[0]
+    ############################################### INGRESAR RANGOS CORRECTOS DE TEMPERATURA ####################################
+
+    sql="""SELECT rangos_peces.temperatura_min FROM rangos_peces, peces WHERE peces.tipo_pez=rangos_peces.tipo_pez;"""
+    cur.execute(sql)
+    list_min2 = cur.fetchall()  #maximo de los minimos ph tenemos que calcular
+
+    max_elem2 = 0
+
+    for i in list_min2:
+        if max_elem2 < i[0]:
+            max_elem2 = i[0]
+    sql="""SELECT rangos_peces.temperatura_max FROM rangos_peces, peces WHERE peces.tipo_pez=rangos_peces.tipo_pez;"""
+    cur.execute(sql)
+    list_max2 = cur.fetchall() #minimo de los maximos ph tenemos que calcular
+
+    min_elem2 = 200
+    for i in list_max2:
+        if min_elem2 > i[0]:
+            min_elem2 = i[0]
+
+    rango = [max_elem,min_elem,max_elem2,min_elem2] # (ph_min,ph_max,temp_min,temp_max)
     if request.method == 'POST':
         nombre_send = request.form['nombre_pez']
         tipopez_send = request.form['tipo_pez']
-
-        ############################################### INGRESAR RANGOS CORRECTOS DE PH ####################################
-        sql="""SELECT rangos_peces.ph_min FROM rangos_peces, peces WHERE peces.tipo_pez=rangos_peces.tipo_pez;"""
-        cur.execute(sql)
-        list_min = cur.fetchall()  #maximo de los minimos ph tenemos que calcular
-
-        max_elem = 0
-
-        for i in list_min:
-            if max_elem < i[0]:
-                max_elem = i[0]
-        sql="""SELECT rangos_peces.ph_max FROM rangos_peces, peces WHERE peces.tipo_pez=rangos_peces.tipo_pez;"""
-        cur.execute(sql)
-        list_max = cur.fetchall() #minimo de los maximos ph tenemos que calcular
-
-        min_elem = 200
-        for i in list_max:
-            if min_elem > i[0]:
-                min_elem = i[0]
 
         sql="""SELECT rangos_peces.ph_min FROM rangos_peces,tipos_aceptados WHERE tipos_aceptados.nombre_tipo = '%s' and rangos_peces.tipo_pez=tipos_aceptados.tipo_pez;"""%(tipopez_send)
         cur.execute(sql)
@@ -120,25 +140,7 @@ def peces(id_pecera):
         cur.execute(sql)
         rango_max = cur.fetchone()
 
-############################################### INGRESAR RANGOS CORRECTOS DE TEMPERATURA ####################################
 
-        sql="""SELECT rangos_peces.temperatura_min FROM rangos_peces, peces WHERE peces.tipo_pez=rangos_peces.tipo_pez;"""
-        cur.execute(sql)
-        list_min2 = cur.fetchall()  #maximo de los minimos ph tenemos que calcular
-
-        max_elem2 = 0
-
-        for i in list_min2:
-            if max_elem2 < i[0]:
-                max_elem2 = i[0]
-        sql="""SELECT rangos_peces.temperatura_max FROM rangos_peces, peces WHERE peces.tipo_pez=rangos_peces.tipo_pez;"""
-        cur.execute(sql)
-        list_max2 = cur.fetchall() #minimo de los maximos ph tenemos que calcular
-
-        min_elem2 = 200
-        for i in list_max2:
-            if min_elem2 > i[0]:
-                min_elem2 = i[0]
 
         sql="""SELECT rangos_peces.temperatura_min FROM rangos_peces,tipos_aceptados WHERE tipos_aceptados.nombre_tipo = '%s' and rangos_peces.tipo_pez=tipos_aceptados.tipo_pez;"""%(tipopez_send)
         cur.execute(sql)
@@ -157,6 +159,7 @@ def peces(id_pecera):
         cur.execute(sql)
         litros_pez_ingresado = cur.fetchone()
 ####
+        rango = [max_elem,min_elem,max_elem2,min_elem2] # (ph_min,ph_max,temp_min,temp_max)
         if litros_total[1] >= litros_pez_ingresado[0]:
             if (rango_min[0]>= max_elem and rango_min[0] <= min_elem) or (rango_max[0]<= min_elem and rango_max[0] >= max_elem) and (rango_min2[0]>= max_elem2 and rango_min2[0] <= min_elem2) or (rango_max2[0]<= min_elem2 and rango_max2[0] >= max_elem2):
                 print("tipo pez :",tipopez_send)
@@ -181,21 +184,27 @@ def peces(id_pecera):
                     sql = """select peces.id,tipos_aceptados.nombre_tipo,peces.nombre_pez from peces,tipos_aceptados where  tipos_aceptados.tipo_pez = peces.tipo_pez;"""
                     cur.execute(sql)
                     lista_peces = cur.fetchall()
+                    
                     danger=1
                 else:
                     danger=2
-
                 sql ="""SELECT litros_disponibles FROM peceras WHERE peceras.id='1'"""
                 cur.execute(sql)
                 litros_disponibles = cur.fetchone()
-                return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces,litros_disponibles=litros_disponibles)
+                return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces,litros_disponibles=litros_disponibles,rangos=rango)
             else:
                 sql ="""SELECT litros_disponibles FROM peceras WHERE peceras.id='1'"""
                 cur.execute(sql)
                 litros_disponibles = cur.fetchone()
                 danger=-2
-                return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces,litros_disponibles=litros_disponibles)
-    return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces,litros_disponibles=litros_disponibles)
+                return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces,litros_disponibles=litros_disponibles,rangos=rango)
+        else:
+            sql ="""SELECT litros_disponibles FROM peceras WHERE peceras.id='1'"""
+            cur.execute(sql)
+            litros_disponibles = cur.fetchone()
+            danger=-2
+            return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces,litros_disponibles=litros_disponibles,rangos=rango)
+    return render_template("peces.html",tipo_agua2 = tipo_agua ,nombres_aceptados = nombres_aceptados,danger=danger,peces=lista_peces,litros_disponibles=litros_disponibles,rangos=rango)
 
 
 @app.route('/delete/<id>',methods=['GET','POST'])

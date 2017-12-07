@@ -122,10 +122,42 @@
 <div class="row">
   <div class="panel panel-primary">
     <div class="panel-heading text-center">
-        Litros disponibles
+      Datos utiles
     </div>
     <div class="panel-body">
-      <h2 class="text-center">{{litros_disponibles[0]}}</h2>
+      <div class="col-lg-4">
+        <div class="panel panel-default">
+          <div class="panel-heading text-center">
+                Litros disponibles
+          </div>
+          <div class="panel-body text-center">
+            <h2 class="text-center">{{litros_disponibles[0]}}</h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="panel panel-default">
+          <div class="panel-heading text-center">
+                Rangos Ph óptimos
+          </div>
+          <div class="panel-body text-center">
+            <h3 class="text-center"> Max : {{rangos[1]}} </h2>
+            <h3 class="text-center"> Min : {{rangos[0]}}  </h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="panel panel-default">
+          <div class="panel-heading text-center">
+                Rangos Temperatura óptimos
+          </div>
+          <div class="panel-body text-center">
+            <h3 class="text-center"> Max : {{rangos[3]}} </h2>
+            <h3 class="text-center"> Min : {{rangos[2]}}  </h2>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

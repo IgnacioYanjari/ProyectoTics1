@@ -1,12 +1,4 @@
 # ProyectoTics1
-
-## Tareas Por Hacer
-
-  - Modelamiento de la caja (Prototipo)
-  - Agregar Peces
-  - Formula de cantidad de peces
-  - Procesamiento de datos para el conocimiento predictivo de cambios
-  - Prueba Final
   
 ## Información Adicional:
 

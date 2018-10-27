@@ -6,6 +6,9 @@ from app.config import *
 conn = psycopg2.connect("dbname=%s host=%s user=%s password=%s"%(database,host,user,password))
 cur = conn.cursor()
 
+temp = 0
+ph = 0
+
 @app.route('/')
 @app.route('/index',methods=['POST','GET'])
 def index():
